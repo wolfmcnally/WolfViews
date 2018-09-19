@@ -1,0 +1,11 @@
+use_frameworks!
+
+platform :ios, '12.0'
+
+target 'WolfViews_Example' do
+  pod 'WolfViews', :path => '../'
+
+  target 'WolfViews_Tests' do
+    inherit! :search_paths
+  end
+end

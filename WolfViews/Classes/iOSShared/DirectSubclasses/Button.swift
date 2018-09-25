@@ -52,7 +52,9 @@ open class Button: UIButton {
     }
 
     open func setup() { }
+}
 
+extension UIButton {
     public func setTitle(_ title: String, font: UIFont? = nil, normal: UIColor? = nil, highlighted: UIColor? = nil, disabled: UIColor? = .gray) {
         let title = title§
         if let font = font {

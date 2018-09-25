@@ -56,4 +56,11 @@ extension UITableView {
         block()
         endUpdates()
     }
+
+    public func deselectAll(animated: Bool) {
+        guard let indexPaths = indexPathsForSelectedRows else { return }
+        for indexPath in indexPaths {
+            deselectRow(at: indexPath, animated: animated)
+        }
+    }
 }

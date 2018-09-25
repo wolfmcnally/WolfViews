@@ -49,7 +49,9 @@ public class SpacerView: View {
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("not implemented")
+        self.width = 10
+        self.height = 10
+        super.init(coder: aDecoder)
     }
 
     public override var intrinsicContentSize: CGSize {

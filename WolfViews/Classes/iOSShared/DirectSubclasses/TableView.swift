@@ -49,11 +49,4 @@ open class TableView: UITableView {
     }
 
     open func setup() { }
-
-    public func deselectAll(animated: Bool) {
-        guard let selectedIndexPaths = indexPathsForSelectedRows else { return }
-        for indexPath in selectedIndexPaths {
-            deselectRow(at: indexPath, animated: animated)
-        }
-    }
 }

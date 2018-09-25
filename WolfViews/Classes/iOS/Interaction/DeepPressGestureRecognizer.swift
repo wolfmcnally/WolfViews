@@ -35,6 +35,9 @@ public class DeepPressGestureRecognizer: UIGestureRecognizer {
         }
     }
 
+    private lazy var heavyFeedbackGenerator = FeedbackGenerator(haptic: .heavy)
+    private lazy var lightFeedbackGenerator = FeedbackGenerator(haptic: .light)
+
     private var needsBeginGesture: Asynchronizer?
 
     enum DeepPressState {
@@ -53,13 +56,13 @@ public class DeepPressGestureRecognizer: UIGestureRecognizer {
     private func beginGesture() {
         myState = .pressedDeep
         state = .began
-        feedbackGenerator.heavy()
+        heavyFeedbackGenerator.play()
     }
 
     private func setNeedsBeginGesture() {
         myState = .pressedHeavy
         if let needsBeginGesture = needsBeginGesture {
-            feedbackGenerator.light()
+            lightFeedbackGenerator.play()
             needsBeginGesture.setNeedsSync()
         } else {
             beginGesture()

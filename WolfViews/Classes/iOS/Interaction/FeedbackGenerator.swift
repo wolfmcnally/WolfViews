@@ -24,83 +24,72 @@
 
 import AudioToolbox
 
-public let feedbackGenerator = FeedbackGenerator()
-
 public class FeedbackGenerator {
-    //available(iOS, 10.0, *)
-    private var selectionGenerator: Any?
-    private var heavyGenerator: Any?
-    private var mediumGenerator: Any?
-    private var lightGenerator: Any?
-    private var notificationGenerator: Any?
+    private let haptic: Haptic?
+    private let feedbackGenerator: UIFeedbackGenerator?
+    private let soundID: SystemSoundID?
 
-    public func selectionChanged() {
-        if #available(iOS 10.0, *) {
-            if selectionGenerator == nil {
-                selectionGenerator = UISelectionFeedbackGenerator()
+    public enum Haptic {
+        case selection
+        case heavy
+        case medium
+        case light
+        case error
+        case success
+        case warning
+    }
+
+    public init(haptic: Haptic? = nil, soundFile: String? = nil, subdirectory: String? = nil) {
+        self.haptic = haptic
+        if let haptic = haptic {
+            switch haptic {
+            case .selection:
+                feedbackGenerator = UISelectionFeedbackGenerator()
+            case .heavy:
+                feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+            case .medium:
+                feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+            case .light:
+                feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+            case .error, .success, .warning:
+                feedbackGenerator = UINotificationFeedbackGenerator()
             }
+        } else {
+            feedbackGenerator = nil
+        }
 
-            (selectionGenerator as! UISelectionFeedbackGenerator).selectionChanged()
+        if let soundFile = soundFile, let url = Bundle.main.url(forResource: soundFile, withExtension: nil, subdirectory: subdirectory) {
+            var soundID: SystemSoundID = 0
+            AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
+            self.soundID = soundID
+        } else {
+            soundID = nil
         }
     }
 
-    public func heavy() {
-        if #available(iOS 10.0, *) {
-            if heavyGenerator == nil {
-                heavyGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    public func play() {
+        if let haptic = haptic {
+            switch haptic {
+            case .selection:
+                (feedbackGenerator as! UISelectionFeedbackGenerator).selectionChanged()
+            case .heavy, .medium, .light:
+                (feedbackGenerator as! UIImpactFeedbackGenerator).impactOccurred()
+            case .error:
+                (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.error)
+            case .success:
+                (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.success)
+            case .warning:
+                (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.warning)
             }
-
-            (heavyGenerator as! UIImpactFeedbackGenerator).impactOccurred()
+        }
+        if let soundID = soundID {
+            AudioServicesPlaySystemSound(soundID)
         }
     }
 
-    public func medium() {
-        if #available(iOS 10.0, *) {
-            if mediumGenerator == nil {
-                mediumGenerator = UIImpactFeedbackGenerator(style: .medium)
-            }
-
-            (mediumGenerator as! UIImpactFeedbackGenerator).impactOccurred()
-        }
-    }
-
-    public func light() {
-        if #available(iOS 10.0, *) {
-            if lightGenerator == nil {
-                lightGenerator = UIImpactFeedbackGenerator(style: .light)
-            }
-
-            (lightGenerator as! UIImpactFeedbackGenerator).impactOccurred()
-        }
-    }
-
-    public func error() {
-        if #available(iOS 10.0, *) {
-            if notificationGenerator == nil {
-                notificationGenerator = UINotificationFeedbackGenerator()
-            }
-
-            (notificationGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.error)
-        }
-    }
-
-    public func success() {
-        if #available(iOS 10.0, *) {
-            if notificationGenerator == nil {
-                notificationGenerator = UINotificationFeedbackGenerator()
-            }
-
-            (notificationGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.success)
-        }
-    }
-
-    public func warning() {
-        if #available(iOS 10.0, *) {
-            if notificationGenerator == nil {
-                notificationGenerator = UINotificationFeedbackGenerator()
-            }
-
-            (notificationGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.warning)
+    deinit {
+        if let soundID = soundID {
+            AudioServicesDisposeSystemSoundID(soundID)
         }
     }
 }

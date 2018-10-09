@@ -26,6 +26,7 @@ import UIKit
 import WolfGeometry
 import WolfConcurrency
 import WolfAnimation
+import WolfPipe
 
 extension UIWindow {
     public func replaceRootViewController(with newController: UIViewController, animated: Bool = true) -> SuccessPromise {
@@ -35,18 +36,15 @@ extension UIWindow {
 
             func onCompletion() {
                 snapshotImageView.removeFromSuperview()
-                promise.keep(())
+                promise.keep()
             }
 
             func animateTransition() {
                 rootViewController = newController
                 bringSubviewToFront(snapshotImageView)
                 if animated {
-                    dispatchAnimated {
-                        snapshotImageView.alpha = 0
-                        }.then { _ in
-                            onCompletion()
-                        }.run()
+                    run <| animation { snapshotImageView.alpha = 0 }
+                        ||* { onCompletion() }
                 } else {
                     onCompletion()
                 }

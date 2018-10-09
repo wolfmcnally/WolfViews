@@ -26,6 +26,8 @@ import CoreGraphics
 import WolfOSBridge
 import WolfAnimation
 import WolfApp
+import WolfPipe
+import WolfConcurrency
 
 #if canImport(AppKit)
 
@@ -76,7 +78,7 @@ open class StackView: OSStackView, Editable {
     public func adjustToContentHeightChanges(animated: Bool) {
         //setNeedsLayout()
         guard arrangedSubviews.count > 0 else { return }
-        dispatchAnimated(animated) {
+        run <| WolfAnimation.animation(animated) {
             // KLUDGE: As long as at least one arranged subview changes it's hidden status,
             // the stack view will pick up and properly animated size changes of its other subviews.
             // So here we simply toggle the first arranged subview's hidden status twice.
@@ -85,7 +87,7 @@ open class StackView: OSStackView, Editable {
             view.isHidden = !view.isHidden
 
             self.layoutIfNeeded()
-            }.run()
+        }
     }
 
     public override init(frame: CGRect) {

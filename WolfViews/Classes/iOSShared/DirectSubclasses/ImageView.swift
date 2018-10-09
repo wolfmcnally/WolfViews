@@ -26,6 +26,7 @@ import UIKit
 import WolfConcurrency
 import WolfImage
 import WolfCache
+import WolfPipe
 
 public var sharedImageCache: Cache<UIImage>! = Cache<UIImage>(filename: "sharedImageCache", sizeLimit: 100000, includeHTTP: true)
 public var sharedDataCache: Cache<Data>! = Cache<Data>(filename: "sharedDataCache", sizeLimit: 100000, includeHTTP: true)
@@ -80,24 +81,24 @@ open class ImageView: UIImageView {
             guard let url = self.url else { return }
             self.onRetrieveStart?(self)
             if url.absoluteString.hasSuffix("pdf") {
-                self.retrievePromise = sharedDataCache.retrieveObject(for: url).then { data in
+                self.retrievePromise = run <| sharedDataCache.retrieveObject(for: url) ||> { data in
                     self.pdf = PDF(data: data)
                     self.onRetrieveSuccess?(self)
-                    }.catch { _ in
-                        self.onRetrieveFailure?(self)
-                    }.run { _ in
-                        self.onRetrieveFinally?(self)
-                        self.retrievePromise = nil
+                } ||! { _ in
+                    self.onRetrieveFailure?(self)
+                } ||* {
+                    self.onRetrieveFinally?(self)
+                    self.retrievePromise = nil
                 }
             } else {
-                self.retrievePromise = sharedImageCache.retrieveObject(for: url).then { image in
+                self.retrievePromise = run <| sharedImageCache.retrieveObject(for: url) ||> { image in
                     self.image = image
                     self.onRetrieveSuccess?(self)
-                    }.catch { _ in
-                        self.onRetrieveFailure?(self)
-                    }.run { _ in
-                        self.onRetrieveFinally?(self)
-                        self.retrievePromise = nil
+                } ||! { _ in
+                    self.onRetrieveFailure?(self)
+                } ||* {
+                    self.onRetrieveFinally?(self)
+                    self.retrievePromise = nil
                 }
             }
         }

@@ -27,6 +27,7 @@ import WolfNesting
 import WolfAutolayout
 import WolfConcurrency
 import WolfAnimation
+import WolfPipe
 
 public class ClearFieldButtonView: View {
     public private(set) lazy var button = ClearFieldButton()
@@ -49,20 +50,17 @@ public class ClearFieldButtonView: View {
 
     public func conceal(animated: Bool) {
         if isShown {
-            dispatchAnimated(animated) {
-                self.button.alpha = 0
-            }.then { _ in
-                self.hide()
-            }.run()
+            run <| animation(animated) { self.button.alpha = 0 }
+                ||* { self.hide() }
         }
     }
 
     public func reveal(animated: Bool) {
         if isHidden {
             self.show()
-            dispatchAnimated(animated) {
+            run <| animation(animated) {
                 self.button.alpha = 1
-            }.run()
+            }
         }
     }
 }

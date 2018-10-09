@@ -25,6 +25,8 @@
 import UIKit
 import WolfConcurrency
 import WolfAnimation
+import WolfPipe
+import WolfConcurrency
 
 extension UITableView {
     public func register(nibName name: String, in bundle: Bundle? = nil, forCellReuseIdentifier identifier: String) {
@@ -37,10 +39,10 @@ extension UITableView {
     }
 
     public func syncDynamicContent(of cell: UITableViewCell, animated: Bool = true, scrollingToVisibleAt indexPath: IndexPath? = nil, with updates: @escaping Block) {
-        dispatchAnimated(animated) {
+        run <| animation(animated) {
             updates()
-        }.run()
-        dispatchAnimated(animated) {
+        }
+        run <| animation(animated) {
             self.beginUpdates()
             cell.updateConstraintsIfNeeded()
             cell.layoutIfNeeded()
@@ -48,7 +50,7 @@ extension UITableView {
             guard let indexPath = indexPath else { return }
             let cellFrame = self.rectForRow(at: indexPath)
             self.scrollRectToVisible(cellFrame, animated: animated)
-        }.run()
+        }
     }
 
     public func performUpdates(using block: Block) {

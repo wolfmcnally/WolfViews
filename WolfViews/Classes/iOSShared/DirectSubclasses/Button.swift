@@ -25,6 +25,7 @@
 import UIKit
 import WolfLocale
 import WolfStrings
+import WolfConcurrency
 
 open class Button: UIButton {
     open override func awakeFromNib() {
@@ -52,6 +53,20 @@ open class Button: UIButton {
     }
 
     open func setup() { }
+
+    public var action: Block? {
+        didSet {
+            if action != nil {
+                addTarget(self, action: #selector(performAction), for: .touchUpInside)
+            } else {
+                removeTarget(self, action: #selector(performAction), for: .touchUpInside)
+            }
+        }
+    }
+
+    @objc private func performAction() {
+        action?()
+    }
 }
 
 extension UIButton {

@@ -26,7 +26,7 @@ import AudioToolbox
 
 public class FeedbackGenerator {
     private let haptic: Haptic?
-    private let feedbackGenerator: UIFeedbackGenerator?
+    private let feedbackGenerator: Any? //UIFeedbackGenerator?
     private let soundID: SystemSoundID?
 
     public enum Haptic {
@@ -42,17 +42,21 @@ public class FeedbackGenerator {
     public init(haptic: Haptic? = nil, soundFile: String? = nil, subdirectory: String? = nil) {
         self.haptic = haptic
         if let haptic = haptic {
-            switch haptic {
-            case .selection:
-                feedbackGenerator = UISelectionFeedbackGenerator()
-            case .heavy:
-                feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-            case .medium:
-                feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-            case .light:
-                feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-            case .error, .success, .warning:
-                feedbackGenerator = UINotificationFeedbackGenerator()
+            if #available(iOS 10.0, *) {
+                switch haptic {
+                case .selection:
+                    feedbackGenerator = UISelectionFeedbackGenerator()
+                case .heavy:
+                    feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                case .medium:
+                    feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+                case .light:
+                    feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+                case .error, .success, .warning:
+                    feedbackGenerator = UINotificationFeedbackGenerator()
+                }
+            } else {
+                feedbackGenerator = nil
             }
         } else {
             feedbackGenerator = nil
@@ -69,17 +73,19 @@ public class FeedbackGenerator {
 
     public func play() {
         if let haptic = haptic {
-            switch haptic {
-            case .selection:
-                (feedbackGenerator as! UISelectionFeedbackGenerator).selectionChanged()
-            case .heavy, .medium, .light:
-                (feedbackGenerator as! UIImpactFeedbackGenerator).impactOccurred()
-            case .error:
-                (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.error)
-            case .success:
-                (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.success)
-            case .warning:
-                (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.warning)
+            if #available(iOS 10.0, *) {
+                switch haptic {
+                case .selection:
+                    (feedbackGenerator as! UISelectionFeedbackGenerator).selectionChanged()
+                case .heavy, .medium, .light:
+                    (feedbackGenerator as! UIImpactFeedbackGenerator).impactOccurred()
+                case .error:
+                    (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.error)
+                case .success:
+                    (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.success)
+                case .warning:
+                    (feedbackGenerator as! UINotificationFeedbackGenerator).notificationOccurred(.warning)
+                }
             }
         }
         if let soundID = soundID {

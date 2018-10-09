@@ -26,6 +26,8 @@ import Foundation
 import UIKit
 import WolfAnimation
 import WolfApp
+import WolfPipe
+import WolfConcurrency
 
 //
 // Based on:
@@ -48,11 +50,11 @@ public extension UIApplication {
 
     public func refreshAppearance(animated: Bool) {
         notificationCenter.post(name: .appearanceWillRefreshApplication, object: self)
-        dispatchAnimated {
+        run <| animation {
             self._refreshAppearance(animated: animated)
-        }.finally {
+        } ||* {
             notificationCenter.post(name: .appearanceDidRefreshApplication, object: self)
-        }.run()
+        }
     }
 }
 
@@ -69,11 +71,11 @@ public extension UIWindow {
 
     public func refreshAppearance(animated: Bool) {
         notificationCenter.post(name: .appearanceWillRefreshWindow, object: self)
-        dispatchAnimated {
+        run <| animation {
             self._refreshAppearance()
-        }.finally {
+        } ||* {
             notificationCenter.post(name: .appearanceDidRefreshWindow, object: self)
-        }.run()
+        }
     }
 }
 

@@ -29,6 +29,7 @@
 #endif
 
 import WolfColor
+import WolfOSBridge
 
 public func debugColor(_ debugColor: OSColor = .red, normal normalColor: OSColor = .clear, when isDebug: Bool = true) -> OSColor {
     guard isDebug else { return normalColor }

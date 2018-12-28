@@ -26,6 +26,7 @@ import UIKit
 import WolfLocale
 import WolfStrings
 import WolfConcurrency
+import WolfPipe
 
 open class Button: UIButton {
     open override func awakeFromNib() {
@@ -90,4 +91,23 @@ extension UIButton {
             setAttributedTitle(title, for: [.disabled])
         }
     }
+}
+
+public func setImage<B: UIButton>(_ image: UIImage) -> (_ button: B) -> B {
+    return { button in
+        button.setImage(image, for: [])
+        return button
+    }
+}
+
+public func setAction<B: Button>(_ action: @escaping Block) -> (_ button: B) -> B {
+    return { button in
+        button.action = action
+        return button
+    }
+}
+
+public func showsTouch<B: UIButton>(_ button: B) -> B {
+    button.showsTouchWhenHighlighted = true
+    return button
 }

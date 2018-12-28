@@ -58,4 +58,8 @@ extension UIBarButtonItem {
     public convenience init(title: String, style: UIBarButtonItem.Style = .plain) {
         self.init(title: title, style: style, target: nil, action: nil)
     }
+
+    public convenience init(image: UIImage, style: UIBarButtonItem.Style = .plain) {
+        self.init(image: image, style: style, target: nil, action: nil)
+    }
 }

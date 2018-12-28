@@ -23,6 +23,8 @@
 //  SOFTWARE.
 
 import UIKit
+import WolfGeometry
+import WolfPipe
 
 public class SpacerView: View {
     public var width: CGFloat {
@@ -57,4 +59,28 @@ public class SpacerView: View {
     public override var intrinsicContentSize: CGSize {
         return CGSize(width: width, height: height)
     }
+}
+
+public func vertical<V: SpacerView>(height: CGFloat) -> (_ view: V) -> V {
+    return { view in
+        view.width = noSize
+        view.height = height
+        return view
+    }
+}
+
+public func vertical<V: SpacerView>(_ view: V) -> V {
+    return view |> vertical(height: 10)
+}
+
+public func horizontal<V: SpacerView>(width: CGFloat) -> (_ view: V) -> V {
+    return { view in
+        view.width = width
+        view.height = noSize
+        return view
+    }
+}
+
+public func horizontal<V: SpacerView>(_ view: V) -> V {
+    return view |> horizontal(width: 10)
 }

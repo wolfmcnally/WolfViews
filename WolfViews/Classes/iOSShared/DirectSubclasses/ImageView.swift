@@ -114,7 +114,7 @@ open class ImageView: UIImageView {
         if lastFittingSize != fittingSize || lastPDF !== pdf {
             var newImage = pdf.getImage(fittingSize: fittingSize)
             if let pdfTintColor = pdfTintColor {
-                newImage = newImage?.tinted(withColor: pdfTintColor)
+                newImage = newImage?.tinted(with: pdfTintColor)
             }
             self.image = newImage
             lastFittingSize = fittingSize

@@ -124,3 +124,48 @@ open class StackView: OSStackView, Editable {
 
     open func setup() { }
 }
+
+public func axis<V: UIStackView>(_ axis: NSLayoutConstraint.Axis) -> (_ view: V) -> V {
+    return { view in
+        view.axis = axis
+        return view
+    }
+}
+
+public func horizontal<V: UIStackView>(_ view: V) -> V {
+    return view |> axis(.horizontal)
+}
+
+public func vertical<V: UIStackView>(_ view: V) -> V {
+    return view |> axis(.vertical)
+}
+
+public func spacing<V: UIStackView>(_ spacing: CGFloat) -> (_ view: V) -> V {
+    return { view in
+        view.spacing = spacing
+        return view
+    }
+}
+
+public func distribution<V: UIStackView>(_ distribution: UIStackView.Distribution) -> (_ view: V) -> V {
+    return { view in
+        view.distribution = distribution
+        return view
+    }
+}
+
+public func alignment<V: UIStackView>(_ alignment: UIStackView.Alignment) -> (_ view: V) -> V {
+    return { view in
+        view.alignment = alignment
+        return view
+    }
+}
+
+public func addArrangedSubviews<V: UIStackView>(_ views: [UIView]) -> (_ view: V) -> V {
+    return { view in
+        views.forEach {
+            view.addArrangedSubview($0)
+        }
+        return view
+    }
+}

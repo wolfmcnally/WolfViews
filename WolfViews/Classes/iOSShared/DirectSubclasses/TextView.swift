@@ -143,7 +143,7 @@ extension TextView {
 
 extension TextView {
     public func characterPosition(for point: CGPoint) -> UITextPosition {
-        guard !text.isEmpty else { return beginningOfDocument }
+        guard !isEmpty else { return beginningOfDocument }
 
         let attrText = (attributedText!)§
         let font = attrText.font
@@ -170,5 +170,11 @@ extension TextView {
 
         let index = textStorage.layoutManagers[0].characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         return position(from: beginningOfDocument, offset: index)!
+    }
+}
+
+extension UITextView {
+    var isEmpty: Bool {
+        return text?.isEmpty ?? true
     }
 }

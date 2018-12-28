@@ -23,12 +23,42 @@
 //  SOFTWARE.
 
 import UIKit
+import WolfImage
 
 open class TextField: UITextField {
     var tintedClearImage: UIImage?
     var lastTintColor: UIColor?
     public static var placeholderColor: UIColor?
     var placeholderColor: UIColor?
+    public var clearButtonTintColor: UIColor?
+
+    open func makeTextFieldClearButtonImage(width: CGFloat, color: UIColor) -> UIImage {
+        let size = CGSize(width: width, height: width)
+        return newImage(withSize: size) { context in
+            context.setFillColor(color.cgColor)
+            let bounds = size.bounds
+            context.fillEllipse(in: bounds)
+            let inset = bounds.width * 0.3
+            let xBounds = bounds.insetBy(dx: inset, dy: inset)
+            let path = UIBezierPath()
+            path.move(to: xBounds.minXminY)
+            path.addLine(to: xBounds.maxXmaxY)
+            path.move(to: xBounds.maxXminY)
+            path.addLine(to: xBounds.minXmaxY)
+            path.lineWidth = width * 0.1
+            path.lineCapStyle = .round
+            path.stroke(with: .sourceOut, alpha: 1)
+        }
+    }
+
+    open func applyClearButtonImage() {
+        guard let color = clearButtonTintColor else { return }
+        for view in subviews {
+            guard let button = view as? UIButton else { continue }
+            let width = button.image(for: .normal)?.size.width ?? 14
+            button.setImage(makeTextFieldClearButtonImage(width: width, color: color), for: .normal)
+        }
+    }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,5 +90,23 @@ open class TextField: UITextField {
         set {
             text = newValue
         }
+    }
+
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        applyClearButtonImage()
+    }
+}
+
+extension UITextField {
+    var isEmpty: Bool {
+        return text?.isEmpty ?? true
+    }
+}
+
+public func autocapitalizationType<T: UITextField>(_ value: UITextAutocapitalizationType) -> (_ t: T) -> T {
+    return { t in
+        t.autocapitalizationType = value
+        return t
     }
 }

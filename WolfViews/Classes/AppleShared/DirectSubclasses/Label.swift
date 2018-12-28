@@ -32,11 +32,11 @@ public typealias OSLabel = NSTextField
 
 import WolfStrings
 import WolfGeometry
+import WolfPipe
 
 public typealias TagAction = (String) -> Void
 
 open class Label: OSLabel {
-
     #if os(macOS)
     public var text: String {
     get { return stringValue }
@@ -78,6 +78,18 @@ open class Label: OSLabel {
     }
 
     #endif
+
+    public convenience init(numberOfLines: Int = 1, text: String? = nil) {
+        self.init()
+        self.numberOfLines = numberOfLines
+        self.text = text
+    }
+
+    public convenience init(numberOfLines: Int = 1, text: AttributedString? = nil) {
+        self.init()
+        self.numberOfLines = numberOfLines
+        self.attributedText = text
+    }
 
     public convenience init() {
         self.init(frame: .zero)
@@ -163,3 +175,67 @@ open class Label: OSLabel {
         }
     }
 #endif
+
+public func text<L: UILabel>(_ value: String?) -> (_ label: L) -> L {
+    return { label in
+        label.text = value
+        return label
+    }
+}
+
+public func text<L: UILabel>(_ value: NSAttributedString?) -> (_ label: L) -> L {
+    return { label in
+        label.attributedText = value
+        return label
+    }
+}
+
+public func textAlignment<L: UILabel>(_ value: NSTextAlignment) -> (_ label: L) -> L {
+    return { label in
+        label.textAlignment = value
+        return label
+    }
+}
+
+public func center<L: UILabel>(_ label: L) -> L {
+    return label |> textAlignment(.center)
+}
+
+public func textColor<L: UILabel>(_ value: UIColor) -> (_ label: L) -> L {
+    return { label in
+        label.textColor = value
+        return label
+    }
+}
+
+public func numberOfLines<L: UILabel>(_ value: Int) -> (_ label: L) -> L {
+    return { label in
+        label.numberOfLines = value
+        return label
+    }
+}
+
+public func adjustsFontSizeToFitWidth<L: UILabel>(_ value: Bool) -> (_ label: L) -> L {
+    return { label in
+        label.adjustsFontSizeToFitWidth = value
+        return label
+    }
+}
+
+public func minimumScaleFactor<L: UILabel>(_ value: CGFloat) -> (_ label: L) -> L {
+    return { label in
+        label.minimumScaleFactor = value
+        return label
+    }
+}
+
+public func baselineAdjustment<L: UILabel>(_ value: UIBaselineAdjustment) -> (_ label: L) -> L {
+    return { label in
+        label.baselineAdjustment = value
+        return label
+    }
+}
+
+public func fitToWidth<L: UILabel>(_ label: L) -> L {
+    return label |> adjustsFontSizeToFitWidth(true) |> minimumScaleFactor(0.5) |> baselineAdjustment(.alignCenters)
+}

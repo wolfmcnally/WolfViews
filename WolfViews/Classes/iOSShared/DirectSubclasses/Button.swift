@@ -107,7 +107,9 @@ public func setAction<B: Button>(_ action: @escaping Block) -> (_ button: B) -> 
     }
 }
 
+#if !os(tvOS)
 public func showsTouch<B: UIButton>(_ button: B) -> B {
     button.showsTouchWhenHighlighted = true
     return button
 }
+#endif

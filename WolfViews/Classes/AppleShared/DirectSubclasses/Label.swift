@@ -77,8 +77,6 @@ open class Label: OSLabel {
         text = text?.localized(onlyIfTagged: true)
     }
 
-    #endif
-
     public convenience init(numberOfLines: Int = 1, text: String? = nil) {
         self.init()
         self.numberOfLines = numberOfLines
@@ -90,6 +88,8 @@ open class Label: OSLabel {
         self.numberOfLines = numberOfLines
         self.attributedText = text
     }
+
+    #endif
 
     public convenience init() {
         self.init(frame: .zero)
@@ -174,7 +174,6 @@ open class Label: OSLabel {
             }
         }
     }
-#endif
 
 public func text<L: UILabel>(_ value: String?) -> (_ label: L) -> L {
     return { label in
@@ -239,3 +238,4 @@ public func baselineAdjustment<L: UILabel>(_ value: UIBaselineAdjustment) -> (_ 
 public func fitToWidth<L: UILabel>(_ label: L) -> L {
     return label |> adjustsFontSizeToFitWidth(true) |> minimumScaleFactor(0.5) |> baselineAdjustment(.alignCenters)
 }
+#endif

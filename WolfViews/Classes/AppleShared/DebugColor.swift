@@ -44,6 +44,7 @@ public func debugColor(_ debugColor: OSColor = .red, normal normalColor: OSColor
     return c2.osColor
 }
 
+#if canImport(UIKit)
 public func debugColor<V: UIView>(_ color: OSColor = .red) -> (_ view: V) -> V {
     return { (view: V) -> V in
         view.backgroundColor = debugColor(color, when: true)
@@ -54,3 +55,4 @@ public func debugColor<V: UIView>(_ color: OSColor = .red) -> (_ view: V) -> V {
 public func debugColor<V: UIView>(_ view: V) -> V {
     return view |> debugColor(.red)
 }
+#endif

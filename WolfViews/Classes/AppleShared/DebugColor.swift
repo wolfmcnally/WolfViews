@@ -30,6 +30,7 @@
 
 import WolfColor
 import WolfOSBridge
+import WolfPipe
 
 public func debugColor(_ debugColor: OSColor = .red, normal normalColor: OSColor = .clear, when isDebug: Bool = true) -> OSColor {
     guard isDebug else { return normalColor }
@@ -41,4 +42,15 @@ public func debugColor(_ debugColor: OSColor = .red, normal normalColor: OSColor
     let c = blend(from: n2, to: d2, at: 0.5)
     let c2 = c.withAlphaComponent(0.5)
     return c2.osColor
+}
+
+public func debugColor<V: UIView>(_ color: OSColor = .red) -> (_ view: V) -> V {
+    return { (view: V) -> V in
+        view.backgroundColor = debugColor(color, when: true)
+        return view
+    }
+}
+
+public func debugColor<V: UIView>(_ view: V) -> V {
+    return view |> debugColor(.red)
 }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'WolfViews'
-    s.version          = '1.0.8'
+    s.version          = '1.1.0'
     s.summary          = 'Direct subclasses of iOS views implementing useful patterns, and various utility views.'
 
     # s.description      = <<-DESC

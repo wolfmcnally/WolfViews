@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'WolfViews'
-    s.version          = '1.1.0'
+    s.version          = '2.0.0'
     s.summary          = 'Direct subclasses of iOS views implementing useful patterns, and various utility views.'
 
     # s.description      = <<-DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.author           = { 'Wolf McNally' => 'wolf@wolfmcnally.com' }
     s.source           = { :git => 'https://github.com/wolfmcnally/WolfViews.git', :tag => s.version.to_s }
 
-    s.swift_version = '4.2'
+    s.swift_version = '5.0'
 
     s.ios.deployment_target = '9.3'
     s.ios.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/iOS/**/*', 'WolfViews/Classes/iOSShared/**/*', 'WolfViews/Classes/AppleShared/**/*'

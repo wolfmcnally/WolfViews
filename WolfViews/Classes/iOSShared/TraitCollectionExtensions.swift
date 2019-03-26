@@ -30,6 +30,7 @@ extension UIUserInterfaceSizeClass: CustomStringConvertible {
         case .unspecified: return "unspecified"
         case .compact: return "compact"
         case .regular: return "regular"
+        @unknown default: fatalError()
         }
     }
 }

@@ -37,6 +37,8 @@ extension UIStackView.Distribution: CustomStringConvertible {
             return ".fillEqually"
         case .fillProportionally:
             return ".fillProportionally"
+        @unknown default:
+            fatalError()
         }
     }
 }
@@ -56,6 +58,8 @@ extension UIStackView.Alignment: CustomStringConvertible {
             return ".leading"
         case .trailing:
             return ".trailing"
+        @unknown default:
+            fatalError()
         }
     }
 }

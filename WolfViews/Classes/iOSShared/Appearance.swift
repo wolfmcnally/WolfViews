@@ -35,10 +35,10 @@ import WolfConcurrency
 //
 
 public extension NSNotification.Name {
-    public static let appearanceWillRefreshApplication = NSNotification.Name(rawValue: "appearanceWillRefreshApplicationNotification")
-    public static let appearanceDidRefreshApplication = NSNotification.Name(rawValue: "appearanceDidRefreshApplicationNotification")
-    public static let appearanceWillRefreshWindow = NSNotification.Name(rawValue: "appearanceWillRefreshWindowNotification")
-    public static let appearanceDidRefreshWindow = NSNotification.Name(rawValue: "appearanceDidRefreshWindowNotification")
+    static let appearanceWillRefreshApplication = NSNotification.Name(rawValue: "appearanceWillRefreshApplicationNotification")
+    static let appearanceDidRefreshApplication = NSNotification.Name(rawValue: "appearanceDidRefreshApplicationNotification")
+    static let appearanceWillRefreshWindow = NSNotification.Name(rawValue: "appearanceWillRefreshWindowNotification")
+    static let appearanceDidRefreshWindow = NSNotification.Name(rawValue: "appearanceDidRefreshWindowNotification")
 }
 
 public extension UIApplication {
@@ -48,7 +48,7 @@ public extension UIApplication {
         }
     }
 
-    public func refreshAppearance(animated: Bool) {
+    func refreshAppearance(animated: Bool) {
         notificationCenter.post(name: .appearanceWillRefreshApplication, object: self)
         run <| animation {
             self._refreshAppearance(animated: animated)
@@ -69,7 +69,7 @@ public extension UIWindow {
         addConstraints(constraints)
     }
 
-    public func refreshAppearance(animated: Bool) {
+    func refreshAppearance(animated: Bool) {
         notificationCenter.post(name: .appearanceWillRefreshWindow, object: self)
         run <| animation {
             self._refreshAppearance()
@@ -131,7 +131,7 @@ internal struct AppearanceScope {
 }
 
 internal extension UIAppearance {
-    internal static func appearance(context: AppearanceScope.Context) -> Self {
+    static func appearance(context: AppearanceScope.Context) -> Self {
         switch (context.traitCollection, context.containerTypes) {
         case let (.some(traitCollection), .some(containerTypes)):
             return appearance(for: traitCollection, whenContainedInInstancesOf: containerTypes)
@@ -151,41 +151,41 @@ public protocol AppearanceStyleable: NSObjectProtocol {
 }
 
 public extension AppearanceStyleable where Self.Style.RawValue == String {
-    public static func style(_ style: Style) -> Self.Type {
+    static func style(_ style: Style) -> Self.Type {
         return _styleClass(name: style.rawValue)
     }
 
-    public var style: Style? {
+    var style: Style? {
         get { return Style(rawValueOrNil: Self._styleName(class: object_getClass(self)!)) }
         set { setStyle(newValue, animated: false) }
     }
 
-    public func setStyle(_ style: Style?, animated: Bool) {
+    func setStyle(_ style: Style?, animated: Bool) {
         object_setClass(self, Self._styleClass(name: style?.rawValue))
         appearanceRoot?.refreshAppearance(animated: animated)
     }
 }
 
 public extension AppearanceStyleable where Self: UIView {
-    public var appearanceRoot: UIWindow? {
+    var appearanceRoot: UIWindow? {
         return window
     }
 }
 
 public extension AppearanceStyleable where Self: UIWindow {
-    public var appearanceRoot: UIWindow? {
+    var appearanceRoot: UIWindow? {
         return self
     }
 }
 
 public extension AppearanceStyleable where Self: UIViewController {
-    public var appearanceRoot: UIWindow? {
+    var appearanceRoot: UIWindow? {
         return viewIfLoaded?.window
     }
 }
 
 fileprivate extension RawRepresentable {
-    fileprivate init?(rawValueOrNil: RawValue?) {
+    init?(rawValueOrNil: RawValue?) {
         guard let rawValue = rawValueOrNil else {
             return nil
         }
@@ -206,7 +206,7 @@ fileprivate extension AppearanceStyleable {
         return className.withCString { objc_allocateClassPair(superclass, $0, extraBytes) }
     }
 
-    fileprivate static func _styleClass(name styleName: String?) -> Self.Type {
+    static func _styleClass(name styleName: String?) -> Self.Type {
         guard let subclassName = styleName.flatMap({ _subclassPrefix + $0 }) else {
             return Self.self
         }
@@ -220,7 +220,7 @@ fileprivate extension AppearanceStyleable {
         fatalError("Appearance: failed to subclass \(Self.self) as `\(subclassName)`")
     }
 
-    fileprivate static func _styleName(class styleClass: AnyClass) -> String? {
+    static func _styleName(class styleClass: AnyClass) -> String? {
         let subclassName = String(cString: class_getName(styleClass))
         let subclassPrefix = _subclassPrefix
         guard subclassName.hasPrefix(subclassPrefix) else {
@@ -297,7 +297,7 @@ public extension UIAppearanceContainer {
     /// Nested appearance scope for `Self` container
     ///
     /// - Parameter block: appearance code block for current container
-    public static func appearance(_ block: () -> Void) {
+    static func appearance(_ block: () -> Void) {
         AppearanceScope.main.push(self)
         block()
         AppearanceScope.main.pop()
@@ -312,7 +312,7 @@ public extension UIAppearance where Self: UIAppearanceContainer {
     /// - Parameters:
     ///   - block: appearance code block for current container
     ///   - proxy: appearance proxy to configure
-    public static func appearance(_ block: (_ proxy: Self) -> Void) {
+    static func appearance(_ block: (_ proxy: Self) -> Void) {
         let context = AppearanceScope.main.context
         let proxy = appearance(context: context)
         AppearanceScope.main.push(self)
@@ -329,7 +329,7 @@ public extension UIAppearance {
     /// - Parameters:
     ///   - block: appearance code block for current container
     ///   - proxy: appearance proxy to configure
-    public static func appearance(_ block: (_ proxy: Self) -> Void) {
+    static func appearance(_ block: (_ proxy: Self) -> Void) {
         let context = AppearanceScope.main.context
         let proxy = appearance(context: context)
         if let selfContainerType = self as? UIAppearanceContainer.Type {
@@ -348,7 +348,7 @@ public extension UIAppearance {
     ///   - traits: trait collections
     ///   - block:  appearance code block for current container
     ///   - proxy:  appearance proxy to configure
-    public static func appearance(for traits: UITraitCollection, _ block: (_ proxy: Self) -> Void) {
+    static func appearance(for traits: UITraitCollection, _ block: (_ proxy: Self) -> Void) {
         AppearanceScope.main.push(traits)
         appearance(block)
         AppearanceScope.main.pop()
@@ -360,7 +360,7 @@ public extension UIAppearance {
     /// - Parameters:
     ///   - trait: trait element
     ///   - block: appearance code block
-    public static func appearance(for trait: UITraitCollection.Trait, _ block: (_ proxy: Self) -> Void) {
+    static func appearance(for trait: UITraitCollection.Trait, _ block: (_ proxy: Self) -> Void) {
         appearance(for: UITraitCollection(trait: trait), block)
     }
 
@@ -370,7 +370,7 @@ public extension UIAppearance {
     /// - Parameters:
     ///   - traits: trait element list
     ///   - block:  appearance code block
-    public static func appearance(for traits: [UITraitCollection.Trait], _ block: (_ proxy: Self) -> Void) {
+    static func appearance(for traits: [UITraitCollection.Trait], _ block: (_ proxy: Self) -> Void) {
         appearance(for: UITraitCollection(traits: traits), block)
     }
 
@@ -381,7 +381,7 @@ public extension UIAppearance {
     ///   - containerType: container type
     ///   - block:         appearance code block for current container
     ///   - proxy:         appearance proxy to configure
-    public static func appearance(in containerType: UIAppearanceContainer.Type, _ block: (_ proxy: Self) -> Void) {
+    static func appearance(in containerType: UIAppearanceContainer.Type, _ block: (_ proxy: Self) -> Void) {
         AppearanceScope.main.push(containerType)
         appearance(block)
         AppearanceScope.main.pop()
@@ -394,7 +394,7 @@ public extension UIAppearance {
     ///   - containerTypes: container chain
     ///   - block:          appearance code block for current container
     ///   - proxy:          appearance proxy to configure
-    public static func appearance(inChain containerTypes: [UIAppearanceContainer.Type], _ block: (_ proxy: Self) -> Void) {
+    static func appearance(inChain containerTypes: [UIAppearanceContainer.Type], _ block: (_ proxy: Self) -> Void) {
         AppearanceScope.main.push(containerTypes)
         appearance(block)
         AppearanceScope.main.pop()
@@ -407,7 +407,7 @@ public extension UIAppearance {
     ///   - containerTypes: list of containers
     ///   - block:          appearance code block for current container
     ///   - proxy:          appearance proxy to configure
-    public static func appearance(inAny containerTypes: [UIAppearanceContainer.Type], _ block: (_ proxy: Self) -> Void) {
+    static func appearance(inAny containerTypes: [UIAppearanceContainer.Type], _ block: (_ proxy: Self) -> Void) {
         for container in containerTypes {
             appearance(in: container, block)
         }

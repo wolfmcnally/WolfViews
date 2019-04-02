@@ -110,3 +110,72 @@ public func autocapitalizationType<T: UITextField>(_ value: UITextAutocapitaliza
         return t
     }
 }
+
+public func autocorrectionType<T: UITextField>(_ value: UITextAutocorrectionType) -> (_ t: T) -> T {
+    return { t in
+        t.autocorrectionType = value
+        return t
+    }
+}
+
+public func spellCheckingType<T: UITextField>(_ value: UITextSpellCheckingType) -> (_ t: T) -> T {
+    return { t in
+        t.spellCheckingType = value
+        return t
+    }
+}
+
+@available(iOS 11.0, *)
+public func smartQuotesType<T: UITextField>(_ value: UITextSmartQuotesType) -> (_ t: T) -> T {
+    return { t in
+        t.smartQuotesType = value
+        return t
+    }
+}
+
+@available(iOS 11.0, *)
+public func smartDashesType<T: UITextField>(_ value: UITextSmartDashesType) -> (_ t: T) -> T {
+    return { t in
+        t.smartDashesType = value
+        return t
+    }
+}
+
+@available(iOS 11.0, *)
+public func smartInsertDeleteType<T: UITextField>(_ value: UITextSmartInsertDeleteType) -> (_ t: T) -> T {
+    return { t in
+        t.smartInsertDeleteType = value
+        return t
+    }
+}
+
+public func keyboardType<T: UITextField>(_ value: UIKeyboardType) -> (_ t: T) -> T {
+    return { t in
+        t.keyboardType = value
+        return t
+    }
+}
+
+public func keyboardAppearance<T: UITextField>(_ value: UIKeyboardAppearance) -> (_ t: T) -> T {
+    return { t in
+        t.keyboardAppearance = value
+        return t
+    }
+}
+
+public func returnKeyType<T: UITextField>(_ value: UIReturnKeyType) -> (_ t: T) -> T {
+    return { t in
+        t.returnKeyType = value
+        return t
+    }
+}
+
+public func enablesReturnKeyAutomatically<T: UITextField>(_ t: T) -> T {
+    t.enablesReturnKeyAutomatically = true
+    return t
+}
+
+public func secureTextEntry<T: UITextField>(_ t: T) -> T {
+    t.isSecureTextEntry = true
+    return t
+}

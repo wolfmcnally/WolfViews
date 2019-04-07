@@ -85,7 +85,7 @@ open class StackView: OSStackView, Editable {
     public func adjustToContentHeightChanges(animated: Bool) {
         //setNeedsLayout()
         guard arrangedSubviews.count > 0 else { return }
-        run <| WolfAnimation.animation(animated) {
+        WolfAnimation.animation(animated) {
             // KLUDGE: As long as at least one arranged subview changes it's hidden status,
             // the stack view will pick up and properly animated size changes of its other subviews.
             // So here we simply toggle the first arranged subview's hidden status twice.

@@ -112,7 +112,11 @@ open class Label: OSLabel {
 
     public var drawAtTop = false {
         didSet {
-            setNeedsDisplay()
+            #if os(macOS)
+                needsDisplay = true
+            #else
+                setNeedsDisplay()
+            #endif
         }
     }
 

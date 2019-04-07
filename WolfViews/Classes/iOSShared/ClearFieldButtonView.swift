@@ -50,15 +50,18 @@ public class ClearFieldButtonView: View {
 
     public func conceal(animated: Bool) {
         if isShown {
-            run <| animation(animated) { self.button.alpha = 0 }
-                ||* { self.hide() }
+            animation(animated) {
+                self.button.alpha = 0
+            }.always {
+                self.hide()
+            }
         }
     }
 
     public func reveal(animated: Bool) {
         if isHidden {
             self.show()
-            run <| animation(animated) {
+            animation(animated) {
                 self.button.alpha = 1
             }
         }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'WolfViews'
-    s.version          = '2.1.1'
+    s.version          = '3.0.0'
     s.summary          = 'Direct subclasses of iOS views implementing useful patterns, and various utility views.'
 
     # s.description      = <<-DESC
@@ -14,14 +14,14 @@ Pod::Spec.new do |s|
 
     s.swift_version = '5.0'
 
-    s.ios.deployment_target = '9.3'
+    s.ios.deployment_target = '12.0'
     s.ios.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/iOS/**/*', 'WolfViews/Classes/iOSShared/**/*', 'WolfViews/Classes/AppleShared/**/*'
     s.ios.resources = 'WolfViews/Assets/iOS/*'
 
-    s.macos.deployment_target = '10.13'
+    s.macos.deployment_target = '10.14'
     s.macos.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/macOS/**/*', 'WolfViews/Classes/AppleShared/**/*'
 
-    s.tvos.deployment_target = '11.0'
+    s.tvos.deployment_target = '12.0'
     s.tvos.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/tvOS/**/*', 'WolfViews/Classes/iOSShared/**/*', 'WolfViews/Classes/AppleShared/**/*'
 
     s.module_name = 'WolfViews'

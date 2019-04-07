@@ -39,10 +39,10 @@ extension UITableView {
     }
 
     public func syncDynamicContent(of cell: UITableViewCell, animated: Bool = true, scrollingToVisibleAt indexPath: IndexPath? = nil, with updates: @escaping Block) {
-        run <| animation(animated) {
+        animation(animated) {
             updates()
         }
-        run <| animation(animated) {
+        animation(animated) {
             self.beginUpdates()
             cell.updateConstraintsIfNeeded()
             cell.layoutIfNeeded()

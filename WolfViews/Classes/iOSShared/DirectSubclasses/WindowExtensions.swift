@@ -27,39 +27,39 @@ import WolfGeometry
 import WolfConcurrency
 import WolfAnimation
 import WolfPipe
+import WolfNIO
 
 extension UIWindow {
-    public func replaceRootViewController(with newController: UIViewController, animated: Bool = true) -> SuccessPromise {
-        func perform(promise: SuccessPromise) {
-            let snapshotImageView = UIImageView(image: snapshot())
-            self.addSubview(snapshotImageView)
+    public func replaceRootViewController(with newController: UIViewController, animated: Bool = true) -> Future<Void> {
+        let promise = animationEventLoopGroup.next().makePromise(of: Void.self)
 
-            func onCompletion() {
-                snapshotImageView.removeFromSuperview()
-                promise.keep()
-            }
+        let snapshotImageView = UIImageView(image: snapshot())
+        self.addSubview(snapshotImageView)
 
-            func animateTransition() {
-                rootViewController = newController
-                bringSubviewToFront(snapshotImageView)
-                if animated {
-                    run <| animation { snapshotImageView.alpha = 0 }
-                        ||* { onCompletion() }
-                } else {
-                    onCompletion()
-                }
-            }
+        func onCompletion() {
+            snapshotImageView.removeFromSuperview()
+            promise.succeed(())
+        }
 
-            if let presentedViewController = rootViewController?.presentedViewController {
-                presentedViewController.dismiss(animated: false) {
-                    animateTransition()
-                }
+        func animateTransition() {
+            rootViewController = newController
+            bringSubviewToFront(snapshotImageView)
+            if animated {
+                animation { snapshotImageView.alpha = 0 }.always { onCompletion() }
             } else {
-                animateTransition()
+                onCompletion()
             }
         }
 
-        return SuccessPromise(with: perform)
+        if let presentedViewController = rootViewController?.presentedViewController {
+            presentedViewController.dismiss(animated: false) {
+                animateTransition()
+            }
+        } else {
+            animateTransition()
+        }
+
+        return promise.futureResult
     }
 }
 

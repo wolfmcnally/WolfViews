@@ -50,9 +50,9 @@ public extension UIApplication {
 
     func refreshAppearance(animated: Bool) {
         notificationCenter.post(name: .appearanceWillRefreshApplication, object: self)
-        run <| animation {
+        animation {
             self._refreshAppearance(animated: animated)
-        } ||* {
+        }.always {
             notificationCenter.post(name: .appearanceDidRefreshApplication, object: self)
         }
     }
@@ -71,9 +71,9 @@ public extension UIWindow {
 
     func refreshAppearance(animated: Bool) {
         notificationCenter.post(name: .appearanceWillRefreshWindow, object: self)
-        run <| animation {
+        animation {
             self._refreshAppearance()
-        } ||* {
+        }.always {
             notificationCenter.post(name: .appearanceDidRefreshWindow, object: self)
         }
     }

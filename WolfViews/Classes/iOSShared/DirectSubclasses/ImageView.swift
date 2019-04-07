@@ -27,6 +27,7 @@ import WolfConcurrency
 import WolfImage
 import WolfCache
 import WolfPipe
+import WolfNIO
 
 public var sharedImageCache: Cache<UIImage>! = Cache<UIImage>(filename: "sharedImageCache", sizeLimit: 100000, includeHTTP: true)
 public var sharedDataCache: Cache<Data>! = Cache<Data>(filename: "sharedDataCache", sizeLimit: 100000, includeHTTP: true)
@@ -36,8 +37,7 @@ public typealias ImageProcessingBlock = (UIImage) -> UIImage
 
 open class ImageView: UIImageView {
     public var isTransparentToTouches = false
-    //private var updatePDFCanceler: Cancelable?
-    private var retrievePromise: Cancelable?
+    private var retrieveID: UUID?
     public var onRetrieveStart: ImageViewBlock?
     public var onRetrieveSuccess: ImageViewBlock?
     public var onRetrieveFailure: ImageViewBlock?
@@ -74,31 +74,44 @@ open class ImageView: UIImageView {
 
     public var url: URL? {
         didSet {
-            retrievePromise?.cancel()
-            self.retrievePromise = nil
-            self.pdf = nil
-            self.image = nil
+            retrieveID = nil
+            pdf = nil
+            image = nil
             guard let url = self.url else { return }
+            let myRetrieveID = UUID()
+            retrieveID = myRetrieveID
             self.onRetrieveStart?(self)
             if url.absoluteString.hasSuffix("pdf") {
-                self.retrievePromise = run <| sharedDataCache.retrieveObject(for: url) ||> { data in
+                let futureData = sharedDataCache.retrieveObject(for: url)
+                futureData.whenSuccess { data in
+                    guard self.retrieveID == myRetrieveID else { return }
                     self.pdf = PDF(data: data)
                     self.onRetrieveSuccess?(self)
-                } ||! { _ in
+                }
+                futureData.whenFailure { error in
+                    guard self.retrieveID == myRetrieveID else { return }
                     self.onRetrieveFailure?(self)
-                } ||* {
+                }
+                futureData.whenComplete { _ in
+                    guard self.retrieveID == myRetrieveID else { return }
                     self.onRetrieveFinally?(self)
-                    self.retrievePromise = nil
+                    self.retrieveID = nil
                 }
             } else {
-                self.retrievePromise = run <| sharedImageCache.retrieveObject(for: url) ||> { image in
+                let futureImage = sharedImageCache.retrieveObject(for: url)
+                futureImage.whenSuccess { image in
+                    guard self.retrieveID == myRetrieveID else { return }
                     self.image = image
                     self.onRetrieveSuccess?(self)
-                } ||! { _ in
+                }
+                futureImage.whenFailure { error in
+                    guard self.retrieveID == myRetrieveID else { return }
                     self.onRetrieveFailure?(self)
-                } ||* {
+                }
+                futureImage.whenComplete { _ in
+                    guard self.retrieveID == myRetrieveID else { return }
                     self.onRetrieveFinally?(self)
-                    self.retrievePromise = nil
+                    self.retrieveID = nil
                 }
             }
         }

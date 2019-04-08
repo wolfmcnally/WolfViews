@@ -24,7 +24,7 @@
 
 import UIKit
 import WolfGeometry
-import WolfPipe
+import WolfCore
 
 public class SpacerView: View {
     public var width: CGFloat {

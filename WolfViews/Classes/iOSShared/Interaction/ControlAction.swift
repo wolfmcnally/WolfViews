@@ -23,8 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfStrings
-import WolfConcurrency
+import WolfCore
 
 private let controlActionSelector = #selector(ControlAction.controlAction)
 

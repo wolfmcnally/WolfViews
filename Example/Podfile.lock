@@ -21,70 +21,58 @@ PODS:
     - SwiftNIOConcurrencyHelpers (~> 2.0)
     - SwiftNIOFoundationCompat (~> 2.0)
     - SwiftNIOTLS (~> 2.0)
-  - WolfAnimation (3.0.1):
-    - WolfConcurrency
-    - WolfFoundation
+  - WolfAnimation (3.0.2):
+    - WolfCore
     - WolfLog
     - WolfNIO
-  - WolfApp (2.0.1):
-    - WolfConcurrency
-    - WolfFoundation
+  - WolfApp (2.0.2):
+    - WolfCore
     - WolfLocale
-    - WolfOSBridge
-  - WolfAutolayout (2.0.0):
-    - WolfFoundation
+  - WolfAutolayout (2.0.1):
+    - WolfCore
     - WolfGeometry
-    - WolfOSBridge
-    - WolfPipe
-  - WolfCache (3.0.0):
-    - ExtensibleEnumeratedName
-    - WolfConcurrency
+  - WolfCache (3.0.1):
+    - WolfCore
     - WolfImage
     - WolfLog
     - WolfNetwork
     - WolfNIO
-  - WolfColor (4.0.0):
+  - WolfColor (4.0.1):
+    - WolfCore
+  - WolfConcurrency (3.0.2):
     - WolfFoundation
+    - WolfNumerics
+  - WolfCore (4.0.6):
+    - ExtensibleEnumeratedName
+    - WolfConcurrency
+    - WolfFoundation
+    - WolfNesting
     - WolfNumerics
     - WolfOSBridge
     - WolfPipe
-  - WolfConcurrency (3.0.0):
-    - WolfFoundation
-    - WolfLog
-    - WolfNumerics
+    - WolfStrings
+    - WolfWith
   - WolfFoundation (3.0.0):
     - WolfNumerics
     - WolfPipe
-  - WolfGeometry (4.0.0):
-    - ExtensibleEnumeratedName
-    - WolfFoundation
-    - WolfNumerics
-    - WolfStrings
-  - WolfImage (4.0.0):
+  - WolfGeometry (4.0.1):
+    - WolfCore
+  - WolfImage (4.0.1):
     - WolfColor
-    - WolfFoundation
+    - WolfCore
     - WolfGeometry
-    - WolfNumerics
-    - WolfOSBridge
-    - WolfPipe
-  - WolfLocale (2.0.0):
-    - ExtensibleEnumeratedName
+  - WolfLocale (2.0.1):
+    - WolfCore
     - WolfLog
-    - WolfStrings
-  - WolfLog (2.0.0):
-    - ExtensibleEnumeratedName
-    - WolfNumerics
-    - WolfStrings
-  - WolfNesting (2.0.0)
-  - WolfNetwork (3.0.1):
-    - ExtensibleEnumeratedName
+  - WolfLog (2.0.1):
+    - WolfCore
+  - WolfNesting (2.0.1)
+  - WolfNetwork (3.0.2):
     - WolfApp
-    - WolfConcurrency
-    - WolfFoundation
+    - WolfCore
     - WolfLocale
     - WolfLog
     - WolfNIO
-    - WolfPipe
     - WolfPubSub
     - WolfSec
   - WolfNIO (0.1.0):
@@ -93,33 +81,26 @@ PODS:
   - WolfNumerics (4.0)
   - WolfOSBridge (2.0.0)
   - WolfPipe (2.0.0)
-  - WolfPubSub (2.0.0):
-    - WolfConcurrency
-    - WolfFoundation
-  - WolfSec (3.0.0):
-    - WolfFoundation
-    - WolfPipe
+  - WolfPubSub (2.0.1):
+    - WolfCore
+  - WolfSec (3.0.1):
+    - WolfCore
   - WolfStrings (2.0.0):
     - ExtensibleEnumeratedName
     - WolfNumerics
     - WolfOSBridge
     - WolfPipe
     - WolfWith
-  - WolfViews (3.0.0):
+  - WolfViews (3.0.1):
     - WolfAnimation
     - WolfApp
     - WolfAutolayout
     - WolfCache
     - WolfColor
-    - WolfConcurrency
-    - WolfFoundation
+    - WolfCore
     - WolfGeometry
     - WolfImage
     - WolfLocale
-    - WolfNesting
-    - WolfOSBridge
-    - WolfStrings
-    - WolfWith
   - WolfWith (2.0.1)
 
 DEPENDENCIES:
@@ -143,6 +124,7 @@ SPEC REPOS:
     - WolfCache
     - WolfColor
     - WolfConcurrency
+    - WolfCore
     - WolfFoundation
     - WolfGeometry
     - WolfImage
@@ -174,27 +156,28 @@ SPEC CHECKSUMS:
   SwiftNIOFoundationCompat: 6c7250f6a25c96112743a562dbd74e99f00d8f6e
   SwiftNIOTLS: 06bf911bd2f89236cf92519b2eeade592ef4518f
   SwiftNIOTransportServices: 97d9ee8db0b0b015263fbef523f062c8823968a7
-  WolfAnimation: 87068660864cc9d69b75e13c099a8ac7c532f883
-  WolfApp: f02eb400ae880718ca3bc4aea50589fa0f1d2c71
-  WolfAutolayout: c663183345c2b96355622c73973543a38b398599
-  WolfCache: 39dd24924cdba4da86598af1f04b7e9bf32af838
-  WolfColor: d002da00b08a511c364baf7c1c7539878f09ef31
-  WolfConcurrency: f8955c1aab666006226b5a057555e52ab9e1e1cc
+  WolfAnimation: 86ea2630759ca92d54abc011b56455742de8f4b3
+  WolfApp: d6b36d8bc8dcdbbb22c5b071dd6bb1411caed828
+  WolfAutolayout: e387f73b241ac29636dbc99b23d444c16d02119d
+  WolfCache: 0e9a3ebffe3f387a7495e67b9d08e7e72940bec4
+  WolfColor: 066c35c12b7283a1eb12a65d906d9ec4a35216e2
+  WolfConcurrency: 50458b6d801209f89e41d4bb9d57c80c65984770
+  WolfCore: a49dc92accd3c65ad3049ecda1f07d0d36fe7615
   WolfFoundation: df7514e9faf208f591f02cb156ddb537e2a14958
-  WolfGeometry: 5746cc882f3f407d9d7c948d3cd1020e828c3c03
-  WolfImage: 2b95775e99186b8386a91a56747d470f85dc932e
-  WolfLocale: cb8a9870ff13e1b3576d300af7c2057ba6aaaf28
-  WolfLog: b2f3483d6b69aaca1cd65c8e78cf84b20d5dbe50
-  WolfNesting: a35fe79a277341df0e96c720fdce68fb8050f1cb
-  WolfNetwork: 2c25f6653613c463180cb5a0c239d77cf90b237d
+  WolfGeometry: 9b1cbefde3f778ea8e63e849fd26fdc4e3dd86b1
+  WolfImage: 4d9ac3f58f7d8c0df6fca406006305161f45c316
+  WolfLocale: 243737a1cf348a2f37c5a28036cc64be479ed658
+  WolfLog: 6369581c3cbf14c51249a9c0206ebc35a11eb21d
+  WolfNesting: 891247e766da604f0e8124d85a158fe123ceb8d8
+  WolfNetwork: d32435d26cac3b2c3fd91d04761423f16d2ab1e9
   WolfNIO: 1a2ed04ecafdd245cefb1e20130619e95415b811
   WolfNumerics: 6a57756b668073414da8a6911b86781096aded37
   WolfOSBridge: e9260681790a7c89f725e134c0c1d4172d2d2dc9
   WolfPipe: 18ffb77a188263392893a62630defc2a5b92b4f3
-  WolfPubSub: 14a07db9480028525d113ace211532fbdca25600
-  WolfSec: ca7fe7e83a15f4f140fc5b3312ce2e96c0bfd8d3
+  WolfPubSub: f4c6141176090aa434535fa4648029387c37a937
+  WolfSec: f06589dce7f68f82702fed849559007100bdf002
   WolfStrings: edc63c08fbd1149ccbf5eca5020b13465084513b
-  WolfViews: b26c230dfd61acbd210b9abd117a88a3b8105a31
+  WolfViews: bba179f2756013d37f7f40030b3c8da1e8435b10
   WolfWith: 2320a88a03a943df9ff1284c9cca10f86cb73c60
 
 PODFILE CHECKSUM: dba4518268d75fe47d7a0c4af5cdb95635884ef6

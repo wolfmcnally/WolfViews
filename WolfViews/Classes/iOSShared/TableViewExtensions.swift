@@ -23,10 +23,8 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfConcurrency
+import WolfCore
 import WolfAnimation
-import WolfPipe
-import WolfConcurrency
 
 extension UITableView {
     public func register(nibName name: String, in bundle: Bundle? = nil, forCellReuseIdentifier identifier: String) {

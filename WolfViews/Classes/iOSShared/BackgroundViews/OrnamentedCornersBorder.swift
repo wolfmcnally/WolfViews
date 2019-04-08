@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfWith
+import WolfCore
 import WolfGeometry
 
 public struct OrnamentedCornersBorder: Border {

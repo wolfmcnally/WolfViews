@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfConcurrency
+import WolfCore
 
 private let barButtonActionSelector = #selector(BarButtonItemAction.itemAction)
 

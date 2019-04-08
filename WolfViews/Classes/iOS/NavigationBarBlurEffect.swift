@@ -24,6 +24,7 @@
 
 import UIKit
 import WolfAutolayout
+import WolfCore
 
 public class NavigationBarBlurEffect {
     weak var navigationController: UINavigationController!

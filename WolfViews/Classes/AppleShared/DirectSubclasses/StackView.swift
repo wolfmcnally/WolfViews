@@ -23,11 +23,9 @@
 //  SOFTWARE.
 
 import CoreGraphics
-import WolfOSBridge
+import WolfCore
 import WolfAnimation
 import WolfApp
-import WolfPipe
-import WolfConcurrency
 
 #if canImport(AppKit)
 

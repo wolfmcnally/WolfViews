@@ -24,9 +24,8 @@
 
 import UIKit
 import WolfGeometry
-import WolfConcurrency
+import WolfCore
 import WolfAnimation
-import WolfPipe
 import WolfNIO
 
 extension UIWindow {

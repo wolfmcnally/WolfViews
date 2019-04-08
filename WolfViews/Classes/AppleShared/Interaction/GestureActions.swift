@@ -29,7 +29,7 @@
 #endif
 
 import WolfApp
-import WolfOSBridge
+import WolfCore
 
 public class GestureActions {
     unowned let view: OSView

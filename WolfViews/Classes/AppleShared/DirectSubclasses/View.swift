@@ -28,8 +28,7 @@
     import AppKit
 #endif
 
-import WolfNesting
-import WolfOSBridge
+import WolfCore
 import WolfAutolayout
 import WolfApp
 

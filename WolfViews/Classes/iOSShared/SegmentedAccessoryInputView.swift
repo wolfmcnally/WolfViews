@@ -23,10 +23,8 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfNesting
-import WolfConcurrency
-import WolfWith
 import WolfAutolayout
+import WolfCore
 
 public class SegmentedAccessoryInputView: View {
     private lazy var stackView = HorizontalStackView() • { 🍒 in
@@ -35,7 +33,7 @@ public class SegmentedAccessoryInputView: View {
 
     private lazy var backgroundView: UIView = {
         let effect = UIBlurEffect(style: .light)
-        let view = ‡UIVisualEffectView(effect: effect)
+        let view: UIVisualEffectView = ‡UIVisualEffectView(effect: effect)
         return view
     }()
 

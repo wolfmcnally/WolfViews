@@ -24,9 +24,7 @@
 
 import UIKit
 import WolfLocale
-import WolfStrings
-import WolfConcurrency
-import WolfPipe
+import WolfCore
 
 open class Button: UIButton {
     open override func awakeFromNib() {

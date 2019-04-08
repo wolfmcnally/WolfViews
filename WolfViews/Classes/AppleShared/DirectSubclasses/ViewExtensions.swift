@@ -28,7 +28,7 @@
     import UIKit
 #endif
 
-import WolfOSBridge
+import WolfCore
 import WolfAnimation
 
 extension OSView: AnimatedHideable { }

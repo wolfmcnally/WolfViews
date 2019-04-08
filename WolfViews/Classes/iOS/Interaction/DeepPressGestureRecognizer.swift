@@ -24,8 +24,7 @@
 
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
-import WolfNumerics
-import WolfConcurrency
+import WolfCore
 
 public class DeepPressGestureRecognizer: UIGestureRecognizer {
     public var forceThreshold: Frac = 0.75

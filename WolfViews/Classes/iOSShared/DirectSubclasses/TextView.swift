@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfStrings
+import WolfCore
 
 open class TextView: UITextView {
     var tagTapActions = [NSAttributedString.Key: TagAction]()

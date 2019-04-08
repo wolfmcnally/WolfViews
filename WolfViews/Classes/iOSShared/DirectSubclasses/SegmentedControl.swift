@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfStrings
+import WolfCore
 
 open class SegmentedControl: UISegmentedControl {
     public convenience init() {

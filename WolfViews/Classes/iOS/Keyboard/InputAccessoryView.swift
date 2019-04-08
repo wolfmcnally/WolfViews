@@ -22,8 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import WolfFoundation
-import WolfNesting
+import WolfCore
 import WolfAutolayout
 
 /// This class provides a view suitable for assigning to `inputAccessoryView` in

@@ -23,15 +23,14 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfNesting
-import WolfWith
+import WolfCore
 import WolfAutolayout
 import WolfImage
 
 open class PlaceholderView: View {
     public var color: UIColor? { didSet { setNeedsDisplay() } }
     public var lineWidth: CGFloat { didSet { setNeedsDisplay() } }
-    
+
     public private(set) var titleLabel = Label() • { 🍒 in
         🍒.font = .systemFont(ofSize: 12)
         🍒.textColor = .darkGray

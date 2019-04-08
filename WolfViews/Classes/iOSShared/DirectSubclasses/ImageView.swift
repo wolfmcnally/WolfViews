@@ -23,10 +23,9 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfConcurrency
+import WolfCore
 import WolfImage
 import WolfCache
-import WolfPipe
 import WolfNIO
 
 public var sharedImageCache: Cache<UIImage>! = Cache<UIImage>(filename: "sharedImageCache", sizeLimit: 100000, includeHTTP: true)

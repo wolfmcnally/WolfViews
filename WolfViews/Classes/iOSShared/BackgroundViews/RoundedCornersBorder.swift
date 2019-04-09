@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfGeometry
+import WolfGraphics
 
 public struct RoundedCornersBorder: Border {
     private typealias `Self` = RoundedCornersBorder

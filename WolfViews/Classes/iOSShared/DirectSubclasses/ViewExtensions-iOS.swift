@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfImage
+import WolfGraphics
 
 #if !os(tvOS)
     extension UIView {

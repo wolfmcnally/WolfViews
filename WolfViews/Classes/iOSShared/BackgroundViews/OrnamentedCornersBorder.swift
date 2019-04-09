@@ -24,7 +24,7 @@
 
 import UIKit
 import WolfCore
-import WolfGeometry
+import WolfGraphics
 
 public struct OrnamentedCornersBorder: Border {
     private typealias `Self` = OrnamentedCornersBorder

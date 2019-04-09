@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 //import UIKit
-//import WolfColor
+//import WolfGraphics
 //import WolfAutolayout
 //
 //public class BordersTestView: View {

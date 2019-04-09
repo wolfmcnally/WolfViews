@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfGeometry
+import WolfGraphics
 import WolfCore
 import WolfAnimation
 import WolfNIO

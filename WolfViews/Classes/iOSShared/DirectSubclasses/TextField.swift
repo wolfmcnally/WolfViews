@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfImage
+import WolfGraphics
 
 open class TextField: UITextField {
     var tintedClearImage: UIImage?

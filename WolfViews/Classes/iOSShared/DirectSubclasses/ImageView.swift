@@ -24,7 +24,7 @@
 
 import UIKit
 import WolfCore
-import WolfImage
+import WolfGraphics
 import WolfCache
 import WolfNIO
 

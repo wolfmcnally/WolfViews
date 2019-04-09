@@ -31,7 +31,7 @@ public typealias OSLabel = NSTextField
 #endif
 
 import WolfCore
-import WolfGeometry
+import WolfGraphics
 
 public typealias TagAction = (String) -> Void
 

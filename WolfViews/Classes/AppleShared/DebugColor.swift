@@ -28,7 +28,7 @@
     import UIKit
 #endif
 
-import WolfColor
+import WolfGraphics
 import WolfCore
 
 public func debugColor(_ debugColor: OSColor = .red, normal normalColor: OSColor = .clear, when isDebug: Bool = true) -> OSColor {

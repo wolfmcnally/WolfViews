@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'WolfViews'
-    s.version          = '3.0.1'
+    s.version          = '3.0.2'
     s.summary          = 'Direct subclasses of iOS views implementing useful patterns, and various utility views.'
 
     # s.description      = <<-DESC
@@ -27,11 +27,9 @@ Pod::Spec.new do |s|
     s.module_name = 'WolfViews'
 
     s.dependency 'WolfCore'
-    s.dependency 'WolfColor'
+    s.dependency 'WolfGraphics'
     s.dependency 'WolfLocale'
     s.dependency 'WolfAutolayout'
-    s.dependency 'WolfGeometry'
-    s.dependency 'WolfImage'
     s.dependency 'WolfAnimation'
     s.dependency 'WolfApp'
     s.dependency 'WolfCache'

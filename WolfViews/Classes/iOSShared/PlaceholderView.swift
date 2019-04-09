@@ -25,7 +25,7 @@
 import UIKit
 import WolfCore
 import WolfAutolayout
-import WolfImage
+import WolfGraphics
 
 open class PlaceholderView: View {
     public var color: UIColor? { didSet { setNeedsDisplay() } }

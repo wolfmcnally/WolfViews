@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import UIKit
-import WolfGeometry
+import WolfGraphics
 import WolfCore
 
 public class SpacerView: View {

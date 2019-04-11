@@ -30,7 +30,7 @@ import WolfNIO
 
 extension UIWindow {
     public func replaceRootViewController(with newController: UIViewController, animated: Bool = true) -> Future<Void> {
-        let promise = animationEventLoopGroup.next().makePromise(of: Void.self)
+        let promise = MainEventLoop.shared.makePromise(of: Void.self)
 
         let snapshotImageView = UIImageView(image: snapshot())
         self.addSubview(snapshotImageView)

@@ -38,8 +38,7 @@ public class NavigationBarBlurEffect {
     }
 
     func setup() {
-        let effect = UIBlurEffect(style: .light)
-        effectView = ‡UIVisualEffectView(effect: effect)
+        effectView = VisualEffectView(effect: UIBlurEffect(style: .light))
         // Add the effect view as a the first subview of the _UIBarBackground view
         let navigationBar = navigationController.navigationBar
         navigationBar.subviews[0].insertSubview(effectView, at: 0)
@@ -54,7 +53,7 @@ public class NavigationBarBlurEffect {
     }
 
     public func update() {
-        var statusBarAdjustment: CGFloat = -20
+        var statusBarAdjustment: CGFloat = -UIApplication.shared.statusBarFrame.height
         out: do {
             guard navigationController.traitCollection.horizontalSizeClass == .regular else { break out }
             guard navigationController.modalPresentationStyle == .fullScreen else { break out }
@@ -64,10 +63,6 @@ public class NavigationBarBlurEffect {
         }
         topConstraint.constant = statusBarAdjustment
     }
-
-    //    func invalidate() {
-    //        effectView.removeFromSuperview()
-    //    }
 
     public func show() {
         effectView.show()

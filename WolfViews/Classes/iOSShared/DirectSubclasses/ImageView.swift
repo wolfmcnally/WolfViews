@@ -35,8 +35,10 @@ public typealias ImageViewBlock = (ImageView) -> Void
 public typealias ImageProcessingBlock = (UIImage) -> UIImage
 
 open class ImageView: UIImageView {
+    private typealias `Self` = ImageView
+
     public var isTransparentToTouches = false
-    private var retrieveID: UUID?
+    public var retrieveID: UUID?
     public var onRetrieveStart: ImageViewBlock?
     public var onRetrieveSuccess: ImageViewBlock?
     public var onRetrieveFailure: ImageViewBlock?
@@ -59,64 +61,84 @@ open class ImageView: UIImageView {
 
     public var pdfTintColor: UIColor? {
         didSet {
-            //updatePDFImage()
             setNeedsLayout()
         }
     }
 
     public var pdf: PDF? {
         didSet {
-            //updatePDFImage()
             setNeedsLayout()
         }
     }
 
     public var url: URL? {
         didSet {
-            retrieveID = nil
-            pdf = nil
-            image = nil
-            guard let url = self.url else { return }
-            let myRetrieveID = UUID()
-            retrieveID = myRetrieveID
-            self.onRetrieveStart?(self)
-            if url.absoluteString.hasSuffix("pdf") {
-                let futureData = sharedDataCache.retrieveObject(for: url)
-                futureData.whenSuccess { data in
-                    guard self.retrieveID == myRetrieveID else { return }
-                    self.pdf = PDF(data: data)
-                    self.onRetrieveSuccess?(self)
-                }
-                futureData.whenFailure { error in
-                    guard self.retrieveID == myRetrieveID else { return }
-                    self.onRetrieveFailure?(self)
-                }
-                futureData.whenComplete { _ in
-                    guard self.retrieveID == myRetrieveID else { return }
-                    self.onRetrieveFinally?(self)
-                    self.retrieveID = nil
-                }
-            } else {
-                let futureImage = sharedImageCache.retrieveObject(for: url)
-                futureImage.whenSuccess { image in
-                    guard self.retrieveID == myRetrieveID else { return }
-                    self.image = image
-                    self.onRetrieveSuccess?(self)
-                }
-                futureImage.whenFailure { error in
-                    guard self.retrieveID == myRetrieveID else { return }
-                    self.onRetrieveFailure?(self)
-                }
-                futureImage.whenComplete { _ in
-                    guard self.retrieveID == myRetrieveID else { return }
-                    self.onRetrieveFinally?(self)
-                    self.retrieveID = nil
-                }
-            }
+            syncToURL()
         }
     }
 
-    private var lastFittingSize: CGSize?
+    open func resetImages() {
+        retrieveID = nil
+        pdf = nil
+        image = nil
+    }
+
+    private func startRetrieve() -> UUID {
+        let myRetrieveID = UUID()
+        retrieveID = myRetrieveID
+        self.onRetrieveStart?(self)
+        return myRetrieveID
+    }
+
+    private func syncToURL() {
+        resetImages()
+        guard let url = self.url else { return }
+        let myRetrieveID = startRetrieve()
+        let future: Future<Void>
+        if let f = retrieveCustom(for: url, myRetrieveID: myRetrieveID) {
+            future = f
+        } else {
+            future = retrieveImage(for: url, myRetrieveID: myRetrieveID)
+        }
+        future.whenSuccess { _ in
+            guard self.retrieveID == myRetrieveID else { return }
+            self.onRetrieveSuccess?(self)
+        }
+        future.whenFailure { error in
+            guard self.retrieveID == myRetrieveID else { return }
+            self.onRetrieveFailure?(self)
+        }
+        future.whenComplete { _ in
+            guard self.retrieveID == myRetrieveID else { return }
+            self.onRetrieveFinally?(self)
+            self.retrieveID = nil
+        }
+    }
+
+    private func retrievePDF(for url: URL, myRetrieveID: UUID) -> Future<Void>? {
+        guard url.absoluteString.hasSuffix("pdf") else { return nil }
+        return sharedDataCache.retrieveObject(for: url).map { data in
+            if self.retrieveID == myRetrieveID {
+                self.pdf = PDF(data: data)
+            }
+            return ()
+        }
+    }
+
+    open func retrieveCustom(for url: URL, myRetrieveID: UUID) -> Future<Void>? {
+        return self.retrievePDF(for: url, myRetrieveID: myRetrieveID)
+    }
+
+    private func retrieveImage(for url: URL, myRetrieveID: UUID) -> Future<Void> {
+        return sharedImageCache.retrieveObject(for: url).map { image in
+            if self.retrieveID == myRetrieveID {
+                self.image = image
+            }
+            return ()
+        }
+    }
+
+    public var lastFittingSize: CGSize?
     private weak var lastPDF: PDF?
 
     private func updatePDFImage() {

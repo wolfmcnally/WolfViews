@@ -7,12 +7,16 @@ public class DarkMode {
 
     public static let shared = DarkMode()
 
-    let fracDidChange = Event<Frac>()
+    let didChange = Event<(frac: Frac, didSwitch: Bool)>()
+
     private var transition: DarkModeTransition?
 
     // 0.0 is dark mode, 1.0 is light mode
     public var frac: Frac = 0 {
-        didSet { fracDidChange.notify(frac) }
+        didSet {
+            let didSwitch = Self.isDark(frac) != Self.isDark(oldValue)
+            didChange.notify((frac, didSwitch))
+        }
     }
 
     fileprivate init() { }
@@ -37,8 +41,14 @@ public class DarkMode {
         return frac.ledge()
     }
 
-    public static func color(for gradient: Gradient) -> UIColor {
-        return gradient.at(DarkMode.shared.frac).osColor
+    public static func color(for gradient: Gradient, ledge: Bool = false) -> UIColor {
+        let frac: Frac
+        if ledge {
+            frac = DarkMode.shared.isDark ? 0 : 1
+        } else {
+            frac = DarkMode.shared.frac
+        }
+        return gradient.at(frac).osColor
     }
 }
 

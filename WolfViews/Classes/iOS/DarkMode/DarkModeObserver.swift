@@ -1,4 +1,4 @@
 import WolfCore
 import WolfConcurrency
 
-public typealias DarkModeObserver = Event<Frac>.Observer
+public typealias DarkModeObserver = Event<(frac: Frac, didSwitch: Bool)>.Observer

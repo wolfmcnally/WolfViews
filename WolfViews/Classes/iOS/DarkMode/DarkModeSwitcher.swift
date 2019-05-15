@@ -73,7 +73,7 @@ public class DarkModeSwitcher: View, DarkModeObserving {
         startObservingDarkMode()
     }
 
-    public func darkModeDidChange(_: Frac) {
+    public func darkModeDidChange(frac: Frac, didSwitch: Bool) {
         syncToDarkMode()
     }
 

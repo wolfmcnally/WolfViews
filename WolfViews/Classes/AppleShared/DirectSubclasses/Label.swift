@@ -88,6 +88,24 @@ open class Label: OSLabel {
         self.attributedText = text
     }
 
+    public var textInsets = UIEdgeInsets.zero {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+
+    override open func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+        let insetRect = bounds.inset(by: textInsets)
+        let textRect = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
+        let invertedInsets = UIEdgeInsets(top: -textInsets.top,
+                                          left: -textInsets.left,
+                                          bottom: -textInsets.bottom,
+                                          right: -textInsets.right)
+        return textRect.inset(by: invertedInsets)
+    }
+
+    override open func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: textInsets))
+    }
+
     #endif
 
     public convenience init() {

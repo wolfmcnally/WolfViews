@@ -99,7 +99,7 @@ open class TextField: UITextField {
 }
 
 extension UITextField {
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return text?.isEmpty ?? true
     }
 }

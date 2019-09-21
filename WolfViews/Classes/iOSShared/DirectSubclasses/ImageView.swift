@@ -32,6 +32,7 @@ public var sharedImageCache: Cache<UIImage>! = Cache<UIImage>(filename: "sharedI
 public var sharedDataCache: Cache<Data>! = Cache<Data>(filename: "sharedDataCache", sizeLimit: 100000, includeHTTP: true)
 
 public typealias ImageViewBlock = (ImageView) -> Void
+public typealias ImageViewErrorBlock = (ImageView, Error) -> Void
 public typealias ImageProcessingBlock = (UIImage) -> UIImage
 
 open class ImageView: UIImageView {
@@ -41,7 +42,7 @@ open class ImageView: UIImageView {
     public var retrieveID: UUID?
     public var onRetrieveStart: ImageViewBlock?
     public var onRetrieveSuccess: ImageViewBlock?
-    public var onRetrieveFailure: ImageViewBlock?
+    public var onRetrieveFailure: ImageViewErrorBlock?
     public var onRetrieveFinally: ImageViewBlock?
     public var onPostprocessImage: ImageProcessingBlock?
 
@@ -106,7 +107,7 @@ open class ImageView: UIImageView {
         }
         future.whenFailure { error in
             guard self.retrieveID == myRetrieveID else { return }
-            self.onRetrieveFailure?(self)
+            self.onRetrieveFailure?(self, error)
         }
         future.whenComplete { _ in
             guard self.retrieveID == myRetrieveID else { return }

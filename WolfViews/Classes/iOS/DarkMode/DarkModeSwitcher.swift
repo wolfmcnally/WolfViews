@@ -35,6 +35,8 @@ public class DarkModeSwitcher: View, DarkModeObserving {
         self.onTint = onTint
         self.offTint = offTint
         super.init(frame: .zero)
+        isAccessibilityElement = true
+        accessibilityLabel = "Toggle dark mode"
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -69,6 +71,8 @@ public class DarkModeSwitcher: View, DarkModeObserving {
         button.action = { [unowned self] in
             self.toggle()
         }
+
+        button.isAccessibilityElement = false
 
         startObservingDarkMode()
     }

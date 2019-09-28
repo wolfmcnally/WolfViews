@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if os(iOS)
 import UIKit
 import WolfAutolayout
 import WolfCore
@@ -72,3 +73,4 @@ public class NavigationBarBlurEffect {
         effectView.hide()
     }
 }
+#endif

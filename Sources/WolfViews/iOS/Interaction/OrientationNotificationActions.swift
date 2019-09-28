@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if os(iOS)
 import UIKit
 import WolfApp
 
@@ -46,3 +47,4 @@ public class OrientationNotificationActions: NotificationActions {
         set { setAction(using: newValue, object: nil, name: UIApplication.backgroundRefreshStatusDidChangeNotification) }
     }
 }
+#endif

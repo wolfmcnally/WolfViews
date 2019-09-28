@@ -1,6 +1,8 @@
 import WolfCore
 import WolfAnimation
 import WolfColor
+import Foundation
+import UIKit
 
 public class DarkMode {
     private typealias `Self` = DarkMode

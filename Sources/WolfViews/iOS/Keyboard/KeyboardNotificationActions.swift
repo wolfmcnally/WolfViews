@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if os(iOS)
 import UIKit
 
 public class KeyboardNotificationActions {
@@ -72,3 +73,4 @@ public class KeyboardNotificationActions {
         set { setAction(named: UIResponder.keyboardDidHideNotification, using: newValue) }
     }
 }
+#endif

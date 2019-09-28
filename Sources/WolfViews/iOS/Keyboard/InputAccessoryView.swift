@@ -24,6 +24,7 @@
 
 import WolfCore
 import WolfAutolayout
+import UIKit
 
 /// This class provides a view suitable for assigning to `inputAccessoryView` in
 /// UITextView or UITextField. To use it, provide the view that you want to use as its content

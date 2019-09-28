@@ -24,6 +24,7 @@
 
 import WolfFoundation
 import WolfAutolayout
+import UIKit
 
 open class GridView: View {
     public var arrangedSubviews: [[UIView]]! {

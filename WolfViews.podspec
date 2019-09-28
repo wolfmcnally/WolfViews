@@ -15,14 +15,14 @@ Pod::Spec.new do |s|
     s.swift_version = '5.0'
 
     s.ios.deployment_target = '12.0'
-    s.ios.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/iOS/**/*', 'WolfViews/Classes/iOSShared/**/*', 'WolfViews/Classes/AppleShared/**/*'
-    s.ios.resources = 'WolfViews/Assets/iOS/*'
+    s.ios.source_files = 'Sources/WolfViews/Shared/**/*', 'Sources/WolfViews/iOS/**/*', 'Sources/WolfViews/iOSShared/**/*', 'Sources/WolfViews/AppleShared/**/*'
+    s.ios.resources = 'Assets/iOS/*'
 
     s.macos.deployment_target = '10.14'
-    s.macos.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/macOS/**/*', 'WolfViews/Classes/AppleShared/**/*'
+    s.macos.source_files = 'Sources/WolfViews/Shared/**/*', 'Sources/WolfViews/macOS/**/*', 'Sources/WolfViews/AppleShared/**/*'
 
     s.tvos.deployment_target = '12.0'
-    s.tvos.source_files = 'WolfViews/Classes/Shared/**/*', 'WolfViews/Classes/tvOS/**/*', 'WolfViews/Classes/iOSShared/**/*', 'WolfViews/Classes/AppleShared/**/*'
+    s.tvos.source_files = 'Sources/WolfViews/Shared/**/*', 'Sources/WolfViews/tvOS/**/*', 'Sources/WolfViews/iOSShared/**/*', 'Sources/WolfViews/AppleShared/**/*'
 
     s.module_name = 'WolfViews'
 

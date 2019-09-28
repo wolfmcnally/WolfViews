@@ -6,6 +6,7 @@
 //  Copyright © 2017 WolfMcNally.com. All rights reserved.
 //
 
+#if os(macOS)
 import AppKit
 
 public enum ContentMode {
@@ -99,3 +100,4 @@ open class ImageView: NSImageView {
         }
     }
 }
+#endif

@@ -25,6 +25,7 @@
 import WolfCore
 import WolfAutolayout
 import WolfGraphics
+import UIKit
 
 public class BlurBackgroundView: BackgroundView {
     public var cornerRadius: CGFloat = 0 {

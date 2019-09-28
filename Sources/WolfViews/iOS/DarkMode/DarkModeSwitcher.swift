@@ -3,6 +3,7 @@ import WolfColor
 import WolfAnimation
 import WolfNIO
 import WolfAutolayout
+import UIKit
 
 public class DarkModeSwitcher: View, DarkModeObserving {
     public var darkModeObserver: DarkModeObserver? = nil

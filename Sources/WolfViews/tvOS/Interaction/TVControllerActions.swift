@@ -6,6 +6,7 @@
 //  Copyright © 2017 WolfMcNally.com. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public class TVControllerActions: GestureActions {
@@ -78,3 +79,4 @@ public class TVControllerActions: GestureActions {
         set { setPressAction(named: pressMenuName, press: .menu, action: newValue) }
     }
 }
+#endif

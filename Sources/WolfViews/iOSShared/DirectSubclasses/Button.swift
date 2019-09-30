@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 import WolfLocale
 import WolfCore
@@ -110,4 +111,5 @@ public func showsTouch<B: UIButton>(_ button: B) -> B {
     button.showsTouchWhenHighlighted = true
     return button
 }
+#endif
 #endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 
 open class VisualEffectView: UIVisualEffectView {
@@ -18,3 +19,4 @@ open class VisualEffectView: UIVisualEffectView {
 
     open func setup() { }
 }
+#endif

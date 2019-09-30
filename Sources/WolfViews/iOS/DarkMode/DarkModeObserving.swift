@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+import UIKit
 import WolfCore
 
 public protocol DarkModeObserving: class {
@@ -29,3 +31,4 @@ extension DarkModeObserving {
         }
     }
 }
+#endif

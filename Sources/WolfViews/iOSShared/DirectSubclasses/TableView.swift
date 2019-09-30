@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 
 open class TableView: UITableView {
@@ -50,3 +51,4 @@ open class TableView: UITableView {
 
     open func setup() { }
 }
+#endif

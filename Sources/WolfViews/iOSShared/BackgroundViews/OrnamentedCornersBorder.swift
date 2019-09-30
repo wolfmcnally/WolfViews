@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 import WolfCore
 import WolfGraphics
@@ -232,3 +233,4 @@ public struct OrnamentedCornersBorder: Border {
         return path
     }
 }
+#endif

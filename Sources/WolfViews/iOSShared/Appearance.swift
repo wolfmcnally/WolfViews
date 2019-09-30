@@ -22,8 +22,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Foundation
+#if canImport(UIKit)
 import UIKit
+import Foundation
 import WolfAnimation
 import WolfApp
 import WolfCore
@@ -412,3 +413,4 @@ public extension UIAppearance {
         }
     }
 }
+#endif

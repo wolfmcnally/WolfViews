@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 
 open class TableViewCell: UITableViewCell {
@@ -57,3 +58,4 @@ open class TableViewCell: UITableViewCell {
     ////        heightEstimator.update(bounds.height)
     //    }
 }
+#endif

@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 
 protocol TextEditor: AnyObject {
@@ -52,3 +53,4 @@ protocol TextEditor: AnyObject {
 extension TextField: TextEditor { }
 
 extension TextView: TextEditor { }
+#endif

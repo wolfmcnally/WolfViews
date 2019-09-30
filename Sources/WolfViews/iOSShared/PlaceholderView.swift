@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 import WolfCore
 import WolfAutolayout
@@ -86,3 +87,4 @@ open class PlaceholderView: View {
         drawPlaceholderRect(rect, lineWidth: lineWidth, color: color)
     }
 }
+#endif

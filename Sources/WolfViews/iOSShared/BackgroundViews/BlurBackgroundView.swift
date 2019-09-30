@@ -22,10 +22,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
+import UIKit
 import WolfCore
 import WolfAutolayout
 import WolfGraphics
-import UIKit
 
 public class BlurBackgroundView: BackgroundView {
     public var cornerRadius: CGFloat = 0 {
@@ -81,3 +82,4 @@ public class BlurBackgroundView: BackgroundView {
         layer.cornerRadius = min(cornerRadius, bounds.size.min / 2)
     }
 }
+#endif

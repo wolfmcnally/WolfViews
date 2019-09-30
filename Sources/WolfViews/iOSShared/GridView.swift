@@ -22,9 +22,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
+import UIKit
 import WolfFoundation
 import WolfAutolayout
-import UIKit
 
 open class GridView: View {
     public var arrangedSubviews: [[UIView]]! {
@@ -204,3 +205,4 @@ open class GridView: View {
         super.layoutSubviews()
     }
 }
+#endif

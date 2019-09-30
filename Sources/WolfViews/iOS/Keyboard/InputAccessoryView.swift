@@ -22,9 +22,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
+import UIKit
 import WolfCore
 import WolfAutolayout
-import UIKit
 
 /// This class provides a view suitable for assigning to `inputAccessoryView` in
 /// UITextView or UITextField. To use it, provide the view that you want to use as its content
@@ -70,3 +71,4 @@ public class InputAccessoryView: View {
         return .zero
     }
 }
+#endif

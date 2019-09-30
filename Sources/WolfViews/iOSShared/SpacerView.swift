@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 import WolfGraphics
 import WolfCore
@@ -84,3 +85,4 @@ public func horizontal<V: SpacerView>(width: CGFloat) -> (_ view: V) -> V {
 public func horizontal<V: SpacerView>(_ view: V) -> V {
     return view |> horizontal(width: 10)
 }
+#endif

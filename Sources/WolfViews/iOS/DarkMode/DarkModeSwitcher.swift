@@ -1,9 +1,10 @@
+#if canImport(UIKit)
+import UIKit
 import WolfCore
 import WolfColor
 import WolfAnimation
 import WolfNIO
 import WolfAutolayout
-import UIKit
 
 public class DarkModeSwitcher: View, DarkModeObserving {
     public var darkModeObserver: DarkModeObserver? = nil
@@ -142,3 +143,4 @@ public class DarkModeSwitcherItem: UIBarButtonItem {
         set { switcher.barHeight = newValue }
     }
 }
+#endif

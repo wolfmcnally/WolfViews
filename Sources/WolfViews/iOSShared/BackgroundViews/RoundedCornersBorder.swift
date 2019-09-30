@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 import WolfGraphics
 
@@ -68,3 +69,4 @@ public struct RoundedCornersBorder: Border {
         return Self.makeInsets(for: cornerRadius, lineWidth: effectiveLineWidth)
     }
 }
+#endif

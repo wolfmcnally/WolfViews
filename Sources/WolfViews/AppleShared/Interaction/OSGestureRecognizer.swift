@@ -22,18 +22,18 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#if canImport(AppKit)
-    import AppKit
-    public typealias OSGestureRecognizer = NSGestureRecognizer
-    public typealias OSGestureRecognizerDelegate = NSGestureRecognizerDelegate
-    public typealias OSGestureRecognizerState = NSGestureRecognizer.State
-    public typealias OSTapClickGestureRecognizer = NSClickGestureRecognizer
-    public typealias OSPanGestureRecognizer = NSPanGestureRecognizer
-#elseif canImport(UIKit)
-    import UIKit
-    public typealias OSGestureRecognizer = UIGestureRecognizer
-    public typealias OSGestureRecognizerDelegate = UIGestureRecognizerDelegate
+#if canImport(UIKit)
+import UIKit
+public typealias OSGestureRecognizer = UIGestureRecognizer
+public typealias OSGestureRecognizerDelegate = UIGestureRecognizerDelegate
 public typealias OSGestureRecognizerState = UIGestureRecognizer.State
-    public typealias OSTapClickGestureRecognizer = UITapGestureRecognizer
-    public typealias OSPanGestureRecognizer = UIPanGestureRecognizer
+public typealias OSTapClickGestureRecognizer = UITapGestureRecognizer
+public typealias OSPanGestureRecognizer = UIPanGestureRecognizer
+#elseif canImport(AppKit)
+import AppKit
+public typealias OSGestureRecognizer = NSGestureRecognizer
+public typealias OSGestureRecognizerDelegate = NSGestureRecognizerDelegate
+public typealias OSGestureRecognizerState = NSGestureRecognizer.State
+public typealias OSTapClickGestureRecognizer = NSClickGestureRecognizer
+public typealias OSPanGestureRecognizer = NSPanGestureRecognizer
 #endif

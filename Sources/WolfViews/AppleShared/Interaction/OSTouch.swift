@@ -22,10 +22,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#if canImport(AppKit)
-    import AppKit
-    public typealias OSTouch = NSTouch
-#elseif canImport(UIKit)
-    import UIKit
-    public typealias OSTouch = UITouch
+#if canImport(UIKit)
+import UIKit
+public typealias OSTouch = UITouch
+#elseif canImport(AppKit)
+import AppKit
+public typealias OSTouch = NSTouch
 #endif

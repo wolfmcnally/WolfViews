@@ -27,7 +27,16 @@ import WolfCore
 import WolfAnimation
 import WolfApp
 
-#if canImport(AppKit)
+#if canImport(UIKit)
+
+import UIKit
+public typealias OSStackView = UIStackView
+
+extension UIStackView {
+    public typealias Axis = NSLayoutConstraint.Axis
+}
+
+#elseif canImport(AppKit)
 
 import AppKit
 public typealias OSStackView = NSStackView
@@ -40,15 +49,6 @@ extension NSStackView {
         get { return orientation }
         set { orientation = newValue }
     }
-}
-
-#elseif canImport(UIKit)
-
-import UIKit
-public typealias OSStackView = UIStackView
-
-extension UIStackView {
-    public typealias Axis = NSLayoutConstraint.Axis
 }
 
 #endif

@@ -18,7 +18,7 @@ let package = Package(
         .package(url: "https://github.com/wolfmcnally/WolfAutolayout", from: "2.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfAnimation", from: "3.0.0"),
         .package(url: "https://github.com/wolfmcnally/WolfApp", from: "2.0.0"),
-        .package(url: "https://github.com/wolfmcnally/WolfCache", from: "3.0.0"),
+        .package(url: "https://github.com/wolfmcnally/WolfCache", from: "4.0.0"),
     ],
     targets: [
         .target(

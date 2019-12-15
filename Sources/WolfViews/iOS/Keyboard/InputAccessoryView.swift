@@ -24,8 +24,9 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
+import WolfNesting
+import WolfFoundation
 
 /// This class provides a view suitable for assigning to `inputAccessoryView` in
 /// UITextView or UITextField. To use it, provide the view that you want to use as its content

@@ -28,9 +28,11 @@
     import AppKit
 #endif
 
-import WolfCore
 import WolfAutolayout
 import WolfApp
+import WolfOSBridge
+import WolfNesting
+import WolfFoundation
 
 open class View: OSView {
     public convenience init() {

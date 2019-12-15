@@ -24,9 +24,9 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
 import WolfApp
+import WolfStrings
 
 extension UIView {
     public func printViewHierarchy(includingConstraints includeOwnedConstraints: Bool = false, includingConstraintsAffectingHorizontal includeHConstraints: Bool = false, includingConstraintsAffectingVertical includeVConstraints: Bool = false) {

@@ -24,9 +24,10 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
-import WolfGraphics
+import WolfWith
+import WolfNesting
+import WolfImage
 
 open class PlaceholderView: View {
     public var color: UIColor? { didSet { setNeedsDisplay() } }

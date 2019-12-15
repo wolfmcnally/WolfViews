@@ -24,8 +24,8 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAnimation
+import WolfConcurrency
 
 extension UITableView {
     public func register(nibName name: String, in bundle: Bundle? = nil, forCellReuseIdentifier identifier: String) {

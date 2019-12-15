@@ -24,7 +24,7 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfGraphics
+import WolfGeometry
 
 public struct RoundedCornersBorder: Border {
     private typealias `Self` = RoundedCornersBorder

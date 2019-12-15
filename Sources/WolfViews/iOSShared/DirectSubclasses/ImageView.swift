@@ -24,10 +24,9 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
-import WolfGraphics
 import WolfCache
 import WolfNIO
+import WolfImage
 
 public var sharedImageCache: Cache<UIImage>! = Cache<UIImage>(filename: "sharedImageCache", sizeLimit: 100000, includeHTTP: true)
 public var sharedDataCache: Cache<Data>! = Cache<Data>(filename: "sharedDataCache", sizeLimit: 100000, includeHTTP: true)

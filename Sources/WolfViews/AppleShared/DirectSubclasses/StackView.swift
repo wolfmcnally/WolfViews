@@ -23,9 +23,10 @@
 //  SOFTWARE.
 
 import CoreGraphics
-import WolfCore
 import WolfAnimation
 import WolfApp
+import WolfPipe
+import WolfOSBridge
 
 #if canImport(UIKit)
 

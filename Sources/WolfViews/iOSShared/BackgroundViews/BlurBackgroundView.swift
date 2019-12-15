@@ -24,9 +24,9 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
-import WolfGraphics
+import WolfFoundation
+import WolfNesting
 
 public class BlurBackgroundView: BackgroundView {
     public var cornerRadius: CGFloat = 0 {

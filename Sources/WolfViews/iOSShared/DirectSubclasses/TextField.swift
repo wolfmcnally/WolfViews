@@ -24,7 +24,7 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfGraphics
+import WolfImage
 
 open class TextField: UITextField {
     var tintedClearImage: UIImage?

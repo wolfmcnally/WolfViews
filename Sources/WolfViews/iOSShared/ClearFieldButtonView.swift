@@ -24,9 +24,9 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
 import WolfAnimation
+import WolfNesting
 
 public class ClearFieldButtonView: View {
     public private(set) lazy var button = ClearFieldButton()

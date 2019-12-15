@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import Foundation
-import WolfCore
+import WolfOSBridge
 
 private let gestureActionSelector = #selector(GestureRecognizerAction.gestureAction)
 

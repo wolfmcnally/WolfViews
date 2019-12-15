@@ -27,7 +27,6 @@ import UIKit
 import Foundation
 import WolfAnimation
 import WolfApp
-import WolfCore
 
 //
 // Based on:

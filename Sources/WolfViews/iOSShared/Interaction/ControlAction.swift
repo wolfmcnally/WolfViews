@@ -24,7 +24,8 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
+import WolfConcurrency
+import WolfStrings
 
 private let controlActionSelector = #selector(ControlAction.controlAction)
 

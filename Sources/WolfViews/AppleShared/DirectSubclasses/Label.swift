@@ -30,8 +30,9 @@ import AppKit
 public typealias OSLabel = NSTextField
 #endif
 
-import WolfCore
-import WolfGraphics
+import WolfStrings
+import WolfPipe
+import WolfGeometry
 
 public typealias TagAction = (String) -> Void
 

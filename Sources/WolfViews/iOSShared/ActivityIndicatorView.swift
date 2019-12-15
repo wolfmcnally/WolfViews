@@ -24,8 +24,11 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
+import WolfNesting
+import WolfWith
+import WolfConcurrency
+import WolfFoundation
 
 public class ActivityIndicatorView: View {
     private let style: UIActivityIndicatorView.Style

@@ -23,7 +23,7 @@
 //  SOFTWARE.
 
 import Foundation
-import WolfCore
+import WolfOSBridge
 
 public enum ViewRelationship {
     case unrelated

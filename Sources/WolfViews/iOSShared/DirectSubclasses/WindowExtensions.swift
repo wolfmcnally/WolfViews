@@ -24,10 +24,9 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfGraphics
-import WolfCore
 import WolfAnimation
 import WolfNIO
+import WolfGeometry
 
 extension UIWindow {
     public func replaceRootViewController(with newController: UIViewController, animated: Bool = true) -> Future<Void> {

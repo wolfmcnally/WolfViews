@@ -24,7 +24,8 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
+import WolfConcurrency
+import WolfImage
 
 private let barButtonActionSelector = #selector(BarButtonItemAction.itemAction)
 

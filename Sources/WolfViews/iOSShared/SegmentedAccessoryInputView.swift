@@ -25,7 +25,10 @@
 #if canImport(UIKit)
 import UIKit
 import WolfAutolayout
-import WolfCore
+import WolfWith
+import WolfConcurrency
+import WolfNesting
+import WolfFoundation
 
 public class SegmentedAccessoryInputView: View {
     private lazy var stackView = HorizontalStackView() • { 🍒 in

@@ -24,8 +24,11 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfAutolayout
+import WolfWith
+import WolfNesting
+import WolfConcurrency
+import WolfFoundation
 
 public class ActivityOverlayView: View {
     public private(set) var hysteresis: Hysteresis!

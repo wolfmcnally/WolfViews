@@ -24,7 +24,7 @@
 
 #if canImport(UIKit)
 import UIKit
-import WolfCore
+import WolfStrings
 
 open class SegmentedControl: UISegmentedControl {
     public convenience init() {

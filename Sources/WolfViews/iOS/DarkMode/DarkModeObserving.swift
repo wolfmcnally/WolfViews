@@ -1,6 +1,6 @@
 #if canImport(UIKit)
 import UIKit
-import WolfCore
+import WolfNumerics
 
 public protocol DarkModeObserving: class {
     var darkModeObserver: DarkModeObserver? { get set }

@@ -1,10 +1,13 @@
 #if canImport(UIKit)
 import UIKit
-import WolfCore
 import WolfColor
 import WolfAnimation
 import WolfNIO
 import WolfAutolayout
+import WolfWith
+import WolfNumerics
+import WolfNesting
+import WolfFoundation
 
 public class DarkModeSwitcher: View, DarkModeObserving {
     public var darkModeObserver: DarkModeObserver? = nil

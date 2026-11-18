@@ -67,7 +67,7 @@ public func addValueChangedAction<ControlType>(to control: ControlType, action: 
 }
 
 
-public typealias RefreshBlock = (_ completion: @escaping (_ endText: AttributedString?) -> Void) -> AttributedString?
+public typealias RefreshBlock = (_ completion: @escaping (_ endText: WolfStrings.AttributedString?) -> Void) -> WolfStrings.AttributedString?
 
 // Example RefreshBlock that shows the refresh control for 3:
 //

@@ -81,12 +81,12 @@ extension UIButton {
             setAttributedTitle(title, for: [])
         }
         if let highlighted = highlighted {
-            let title = title.mutableCopy() as! AttributedString
+            let title = title.mutableCopy() as! WolfStrings.AttributedString
             title.foregroundColor = highlighted
             setAttributedTitle(title, for: [.highlighted])
         }
         if let disabled = disabled {
-            let title = title.mutableCopy() as! AttributedString
+            let title = title.mutableCopy() as! WolfStrings.AttributedString
             title.foregroundColor = disabled
             setAttributedTitle(title, for: [.disabled])
         }

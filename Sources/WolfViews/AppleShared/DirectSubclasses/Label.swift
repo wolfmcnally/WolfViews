@@ -83,7 +83,7 @@ open class Label: OSLabel {
         self.text = text
     }
 
-    public convenience init(numberOfLines: Int = 1, text: AttributedString? = nil) {
+    public convenience init(numberOfLines: Int = 1, text: WolfStrings.AttributedString? = nil) {
         self.init()
         self.numberOfLines = numberOfLines
         self.attributedText = text
